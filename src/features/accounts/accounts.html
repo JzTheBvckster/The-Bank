@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureBank - Manage Your Accounts">
+    <title>Accounts - SecureBank</title>
+    <link rel="stylesheet" href="../../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="../dashboard/dashboard.css">
+    <link rel="stylesheet" href="accounts.css">
+</head>
+
+<body class="theme-light">
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="../../../public/index.html" class="logo">
+                    <span class="logo-icon">🏦</span>
+                    <span class="logo-text">SecureBank</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../dashboard/dashboard.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="accounts.html" class="nav-link">
+                            <span class="nav-icon">💳</span>
+                            <span class="nav-text">Accounts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../transfers/transfers.html" class="nav-link">
+                            <span class="nav-icon">💸</span>
+                            <span class="nav-text">Transfers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../loans/loans.html" class="nav-link">
+                            <span class="nav-icon">📋</span>
+                            <span class="nav-text">Loans</span>
+                        </a>
+                    </li>
+                    <li class="nav-item admin-only hidden">
+                        <a href="../admin/admin.html" class="nav-link">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Admin Panel</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-link" data-action="logout">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Top Bar -->
+            <header class="app-topbar">
+                <div class="topbar-content">
+                    <button class="menu-toggle" data-action="toggle-menu" aria-label="Toggle menu">
+                        <span>☰</span>
+                    </button>
+                    <h1 class="page-title">Accounts</h1>
+                    <div class="topbar-actions">
+                        <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle theme">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                        <button class="btn btn-primary" data-action="new-account">
+                            <span>➕</span> New Account
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Accounts Content -->
+            <div class="app-content">
+                <!-- Total Balance Card -->
+                <section class="total-balance-card">
+                    <div class="total-balance-content">
+                        <span class="total-label">Total Balance Across All Accounts</span>
+                        <span class="total-value" id="total-balance">$0.00</span>
+                    </div>
+                </section>
+
+                <!-- Accounts Grid -->
+                <section class="accounts-section">
+                    <h2>Your Accounts</h2>
+                    <div class="accounts-grid" id="accounts-grid">
+                        <div class="loading-placeholder">
+                            <div class="spinner"></div>
+                            <p>Loading accounts...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Account Modal -->
+    <div class="modal" id="new-account-modal" role="dialog" aria-hidden="true">
+        <div class="modal-overlay" data-action="close-modal"></div>
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Open New Account</h2>
+                <button class="modal-close" data-action="close-modal">&times;</button>
+            </header>
+            <div class="modal-body">
+                <form id="new-account-form" novalidate>
+                    <div class="form-group">
+                        <label for="accountType" class="form-label">Account Type</label>
+                        <select id="accountType" name="accountType" class="form-select" required>
+                            <option value="">Select account type</option>
+                            <option value="checking">Checking Account</option>
+                            <option value="savings">Savings Account</option>
+                            <option value="investment">Investment Account</option>
+                        </select>
+                        <span class="form-error" id="accountType-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currency" class="form-label">Currency</label>
+                        <select id="currency" name="currency" class="form-select" required>
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                        </select>
+                    </div>
+
+                    <div class="account-type-info" id="account-type-info">
+                        <p>Select an account type to see details</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Open Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Details Modal -->
+    <div class="modal" id="account-details-modal" role="dialog" aria-hidden="true">
+        <div class="modal-overlay" data-action="close-details-modal"></div>
+        <div class="modal-content modal-lg">
+            <header class="modal-header">
+                <h2>Account Details</h2>
+                <button class="modal-close" data-action="close-details-modal">&times;</button>
+            </header>
+            <div class="modal-body" id="account-details-content">
+                <!-- Filled dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="accounts.js"></script>
+</body>
+
+</html>

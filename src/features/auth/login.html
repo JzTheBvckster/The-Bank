@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to your SecureBank account">
+    <title>Login - SecureBank</title>
+    <link rel="stylesheet" href="../../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="theme-light">
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <header class="auth-header">
+                    <a href="../../../public/index.html" class="logo">
+                        <span class="logo-icon">🏦</span>
+                        <span class="logo-text">SecureBank</span>
+                    </a>
+                    <h1>Welcome Back</h1>
+                    <p class="text-muted">Sign in to access your account</p>
+                </header>
+
+                <form id="login-form" class="auth-form" novalidate>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+                        <span class="form-error" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" class="password-toggle" data-action="toggle-password" aria-label="Toggle password visibility">
+                                <span class="eye-icon">👁️</span>
+                            </button>
+                        </div>
+                        <span class="form-error" id="password-error"></span>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link" data-action="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-btn">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loader hidden">
+                            <span class="spinner-small"></span>
+                        </span>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="register.html">Create one</a></p>
+                </div>
+            </div>
+
+            <div class="auth-side">
+                <div class="auth-side-content">
+                    <h2>Secure Banking at Your Fingertips</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>View account balances in real-time</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Transfer money instantly</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Apply for loans online</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Track your spending</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Modal -->
+        <div class="modal" id="forgot-modal" role="dialog" aria-labelledby="forgot-modal-title" aria-hidden="true">
+            <div class="modal-overlay" data-action="close-modal"></div>
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2 id="forgot-modal-title">Reset Password</h2>
+                    <button class="modal-close" data-action="close-modal" aria-label="Close modal">&times;</button>
+                </header>
+                <div class="modal-body">
+                    <p>Enter your email address and we'll send you a link to reset your password.</p>
+                    <form id="forgot-form" novalidate>
+                        <div class="form-group">
+                            <label for="forgot-email" class="form-label">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="forgot-email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="Enter your email"
+                                required
+                            >
+                            <span class="form-error" id="forgot-email-error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle floating" data-action="toggle-theme" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+
+    <script type="module" src="auth.js"></script>
+</body>
+</html>

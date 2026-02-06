@@ -1,0 +1,300 @@
+/**
+ * Accounts Feature Styles
+ */
+
+/* ========== Total Balance Card ========== */
+.total-balance-card {
+    background: var(--gradient-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.total-balance-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.total-label {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.total-value {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+/* ========== Accounts Section ========== */
+.accounts-section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ========== Account Card ========== */
+.account-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.account-card.checking {
+    border-top: 4px solid var(--primary-color);
+}
+
+.account-card.savings {
+    border-top: 4px solid var(--success-color);
+}
+
+.account-card.investment {
+    border-top: 4px solid var(--secondary-color);
+}
+
+.account-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.account-icon {
+    font-size: 2rem;
+}
+
+.account-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+.account-status.status-active {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.account-status.status-inactive {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.account-card-type {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.account-card-number {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.copy-btn:hover {
+    opacity: 1;
+}
+
+.account-card-balance {
+    margin-bottom: 1.5rem;
+}
+
+.balance-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.balance-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.account-card-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.account-card-actions .btn {
+    flex: 1;
+}
+
+/* ========== Empty State ========== */
+.empty-state-large {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 2px dashed var(--border-color);
+}
+
+.empty-state-large .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.empty-state-large h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-large p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* ========== Account Type Info ========== */
+.account-type-info {
+    background: var(--hover-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.account-type-info h4 {
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.account-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.account-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.feature-check {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* ========== Account Details Modal ========== */
+.modal-lg {
+    max-width: 600px;
+}
+
+.details-section {
+    margin-bottom: 2rem;
+}
+
+.details-section:last-child {
+    margin-bottom: 0;
+}
+
+.details-section h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.detail-value {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.detail-value.balance {
+    font-size: 1.25rem;
+    color: var(--success-color);
+}
+
+/* Mini Transactions */
+.mini-transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mini-transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: var(--hover-bg);
+}
+
+.mini-trans-desc {
+    color: var(--text-secondary);
+}
+
+.mini-trans-amount.credit {
+    color: var(--success-color);
+}
+
+.mini-trans-amount.debit {
+    color: var(--danger-color);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .total-value {
+        font-size: 2rem;
+    }
+
+    .accounts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}

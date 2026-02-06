@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureBank - Loans">
+    <title>Loans - SecureBank</title>
+    <link rel="stylesheet" href="../../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="../dashboard/dashboard.css">
+    <link rel="stylesheet" href="loans.css">
+</head>
+
+<body class="theme-light">
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="../../../public/index.html" class="logo">
+                    <span class="logo-icon">🏦</span>
+                    <span class="logo-text">SecureBank</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../dashboard/dashboard.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../accounts/accounts.html" class="nav-link">
+                            <span class="nav-icon">💳</span>
+                            <span class="nav-text">Accounts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../transfers/transfers.html" class="nav-link">
+                            <span class="nav-icon">💸</span>
+                            <span class="nav-text">Transfers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="loans.html" class="nav-link">
+                            <span class="nav-icon">📋</span>
+                            <span class="nav-text">Loans</span>
+                        </a>
+                    </li>
+                    <li class="nav-item admin-only hidden">
+                        <a href="../admin/admin.html" class="nav-link">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Admin Panel</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-link" data-action="logout">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Top Bar -->
+            <header class="app-topbar">
+                <div class="topbar-content">
+                    <button class="menu-toggle" data-action="toggle-menu" aria-label="Toggle menu">
+                        <span>☰</span>
+                    </button>
+                    <h1 class="page-title">Loans</h1>
+                    <div class="topbar-actions">
+                        <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle theme">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                        <button class="btn btn-primary" data-action="apply-loan">
+                            <span>📋</span> Apply for Loan
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Loans Content -->
+            <div class="app-content">
+                <!-- Loan Products -->
+                <section class="loan-products">
+                    <h2>Available Loan Products</h2>
+                    <div class="products-grid">
+                        <article class="product-card" data-type="personal">
+                            <div class="product-icon">💰</div>
+                            <h3>Personal Loan</h3>
+                            <p>For your personal needs</p>
+                            <div class="product-rate">
+                                <span class="rate-value">12.5%</span>
+                                <span class="rate-label">APR</span>
+                            </div>
+                            <ul class="product-features">
+                                <li>Up to $50,000</li>
+                                <li>1-5 year terms</li>
+                                <li>Fixed rates</li>
+                            </ul>
+                            <button class="btn btn-outline btn-block" data-action="select-loan"
+                                data-type="personal">Apply Now</button>
+                        </article>
+
+                        <article class="product-card" data-type="home">
+                            <div class="product-icon">🏠</div>
+                            <h3>Home Loan</h3>
+                            <p>Finance your dream home</p>
+                            <div class="product-rate">
+                                <span class="rate-value">8.5%</span>
+                                <span class="rate-label">APR</span>
+                            </div>
+                            <ul class="product-features">
+                                <li>Up to $500,000</li>
+                                <li>15-30 year terms</li>
+                                <li>Competitive rates</li>
+                            </ul>
+                            <button class="btn btn-outline btn-block" data-action="select-loan" data-type="home">Apply
+                                Now</button>
+                        </article>
+
+                        <article class="product-card" data-type="auto">
+                            <div class="product-icon">🚗</div>
+                            <h3>Auto Loan</h3>
+                            <p>Get your new car</p>
+                            <div class="product-rate">
+                                <span class="rate-value">9.5%</span>
+                                <span class="rate-label">APR</span>
+                            </div>
+                            <ul class="product-features">
+                                <li>Up to $75,000</li>
+                                <li>2-7 year terms</li>
+                                <li>Quick approval</li>
+                            </ul>
+                            <button class="btn btn-outline btn-block" data-action="select-loan" data-type="auto">Apply
+                                Now</button>
+                        </article>
+
+                        <article class="product-card" data-type="education">
+                            <div class="product-icon">🎓</div>
+                            <h3>Education Loan</h3>
+                            <p>Invest in your future</p>
+                            <div class="product-rate">
+                                <span class="rate-value">7.5%</span>
+                                <span class="rate-label">APR</span>
+                            </div>
+                            <ul class="product-features">
+                                <li>Up to $100,000</li>
+                                <li>Flexible repayment</li>
+                                <li>Deferred payments</li>
+                            </ul>
+                            <button class="btn btn-outline btn-block" data-action="select-loan"
+                                data-type="education">Apply Now</button>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- My Loans -->
+                <section class="my-loans">
+                    <h2>My Loan Applications</h2>
+                    <div class="loans-list" id="loans-list">
+                        <div class="loading-placeholder">
+                            <div class="spinner"></div>
+                            <p>Loading loans...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loan Application Modal -->
+    <div class="modal" id="loan-modal" role="dialog" aria-hidden="true">
+        <div class="modal-overlay" data-action="close-modal"></div>
+        <div class="modal-content modal-lg">
+            <header class="modal-header">
+                <h2>Loan Application</h2>
+                <button class="modal-close" data-action="close-modal">&times;</button>
+            </header>
+            <div class="modal-body">
+                <form id="loan-form" novalidate>
+                    <div class="form-group">
+                        <label for="loanType" class="form-label">Loan Type</label>
+                        <select id="loanType" name="loanType" class="form-select" required>
+                            <option value="">Select loan type</option>
+                            <option value="personal">Personal Loan (12.5% APR)</option>
+                            <option value="home">Home Loan (8.5% APR)</option>
+                            <option value="auto">Auto Loan (9.5% APR)</option>
+                            <option value="education">Education Loan (7.5% APR)</option>
+                            <option value="business">Business Loan (11% APR)</option>
+                        </select>
+                        <span class="form-error" id="loanType-error"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="amount" class="form-label">Loan Amount</label>
+                            <div class="amount-input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="amount" name="amount" class="form-input" placeholder="0"
+                                    min="1000" max="500000" required>
+                            </div>
+                            <span class="form-hint">Min: $1,000 - Max: $500,000</span>
+                            <span class="form-error" id="amount-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="term" class="form-label">Loan Term (months)</label>
+                            <select id="term" name="term" class="form-select" required>
+                                <option value="">Select term</option>
+                                <option value="12">12 months (1 year)</option>
+                                <option value="24">24 months (2 years)</option>
+                                <option value="36">36 months (3 years)</option>
+                                <option value="48">48 months (4 years)</option>
+                                <option value="60">60 months (5 years)</option>
+                                <option value="84">84 months (7 years)</option>
+                                <option value="120">120 months (10 years)</option>
+                            </select>
+                            <span class="form-error" id="term-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purpose" class="form-label">Purpose of Loan</label>
+                        <textarea id="purpose" name="purpose" class="form-textarea"
+                            placeholder="Briefly describe what you'll use this loan for..." rows="3"
+                            required></textarea>
+                        <span class="form-error" id="purpose-error"></span>
+                    </div>
+
+                    <!-- Loan Calculator Preview -->
+                    <div class="loan-calculator" id="loan-calculator">
+                        <h4>Estimated Monthly Payment</h4>
+                        <div class="calculator-result">
+                            <span class="monthly-payment" id="monthly-payment">$0.00</span>
+                            <span class="payment-label">per month</span>
+                        </div>
+                        <div class="calculator-details">
+                            <div class="calc-detail">
+                                <span>Total Interest:</span>
+                                <span id="total-interest">$0.00</span>
+                            </div>
+                            <div class="calc-detail">
+                                <span>Total Amount:</span>
+                                <span id="total-amount">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="loans.js"></script>
+</body>
+
+</html>

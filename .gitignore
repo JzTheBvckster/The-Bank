@@ -1,0 +1,22 @@
+# Environment-specific configuration
+.env
+.env.*
+*.env
+.env.*.local
+
+# Firebase credentials and service accounts
+firebase*.json
+serviceAccount*.json
+*.serviceAccountKey.json
+
+# Private key material
+*.key
+*.pem
+*.p12
+
+# Firebase CLI local state
+.firebase/
+firebase-debug.log
+
+# Node dependencies generated locally
+functions/node_modules/

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureBank Dashboard - Manage your finances">
+    <title>Dashboard - SecureBank</title>
+    <link rel="stylesheet" href="../../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="theme-light">
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="../../../public/index.html" class="logo">
+                    <span class="logo-icon">🏦</span>
+                    <span class="logo-text">SecureBank</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="dashboard.html" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../accounts/accounts.html" class="nav-link">
+                            <span class="nav-icon">💳</span>
+                            <span class="nav-text">Accounts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../transfers/transfers.html" class="nav-link">
+                            <span class="nav-icon">💸</span>
+                            <span class="nav-text">Transfers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../loans/loans.html" class="nav-link">
+                            <span class="nav-icon">📋</span>
+                            <span class="nav-text">Loans</span>
+                        </a>
+                    </li>
+                    <li class="nav-item admin-only hidden">
+                        <a href="../admin/admin.html" class="nav-link">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Admin Panel</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="nav-link" data-action="logout">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Top Bar -->
+            <header class="app-topbar">
+                <div class="topbar-content">
+                    <button class="menu-toggle" data-action="toggle-menu" aria-label="Toggle menu">
+                        <span>☰</span>
+                    </button>
+                    <h1 class="page-title">Dashboard</h1>
+                    <div class="topbar-actions">
+                        <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle theme">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                        <div class="user-menu">
+                            <button class="user-btn" data-action="toggle-user-menu">
+                                <span class="user-avatar">👤</span>
+                                <span class="user-name" id="user-name">Loading...</span>
+                                <span class="dropdown-icon">▼</span>
+                            </button>
+                            <div class="user-dropdown" id="user-dropdown">
+                                <a href="#" class="dropdown-item">
+                                    <span>👤</span> Profile
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <span>⚙️</span> Settings
+                                </a>
+                                <hr class="dropdown-divider">
+                                <button class="dropdown-item" data-action="logout">
+                                    <span>🚪</span> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="app-content">
+                <!-- Welcome Banner -->
+                <section class="welcome-banner">
+                    <div class="welcome-text">
+                        <h2>Welcome back, <span id="welcome-name">User</span>!</h2>
+                        <p>Here's an overview of your financial activities</p>
+                    </div>
+                    <div class="welcome-date" id="current-date"></div>
+                </section>
+
+                <!-- Stats Cards -->
+                <section class="stats-grid">
+                    <article class="stat-card balance-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">💰</span>
+                            <span class="stat-label">Total Balance</span>
+                        </div>
+                        <div class="stat-value" id="total-balance">$0.00</div>
+                        <div class="stat-change positive">
+                            <span>↑ 12.5%</span>
+                            <span class="change-period">vs last month</span>
+                        </div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">📈</span>
+                            <span class="stat-label">Monthly Income</span>
+                        </div>
+                        <div class="stat-value" id="monthly-income">$0.00</div>
+                        <div class="stat-change positive">
+                            <span>↑ 8.2%</span>
+                            <span class="change-period">vs last month</span>
+                        </div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">📉</span>
+                            <span class="stat-label">Monthly Expenses</span>
+                        </div>
+                        <div class="stat-value" id="monthly-expenses">$0.00</div>
+                        <div class="stat-change negative">
+                            <span>↓ 3.1%</span>
+                            <span class="change-period">vs last month</span>
+                        </div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">🏦</span>
+                            <span class="stat-label">Active Loans</span>
+                        </div>
+                        <div class="stat-value" id="active-loans">0</div>
+                        <div class="stat-info">
+                            <span id="total-debt">$0.00 total debt</span>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <a href="../transfers/transfers.html" class="action-card">
+                            <span class="action-icon">💸</span>
+                            <span class="action-text">Send Money</span>
+                        </a>
+                        <a href="../accounts/accounts.html" class="action-card">
+                            <span class="action-icon">➕</span>
+                            <span class="action-text">New Account</span>
+                        </a>
+                        <a href="../loans/loans.html" class="action-card">
+                            <span class="action-icon">📋</span>
+                            <span class="action-text">Apply for Loan</span>
+                        </a>
+                        <a href="#" class="action-card" data-action="download-statement">
+                            <span class="action-icon">📄</span>
+                            <span class="action-text">Statements</span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Recent Transactions & Account Cards -->
+                <div class="dashboard-grid">
+                    <!-- Recent Transactions -->
+                    <section class="card transactions-card">
+                        <header class="card-header">
+                            <h3 class="card-title">Recent Transactions</h3>
+                            <a href="../transfers/transfers.html" class="view-all">View All →</a>
+                        </header>
+                        <div class="card-body">
+                            <div class="transactions-list" id="transactions-list">
+                                <div class="loading-placeholder">
+                                    <div class="spinner"></div>
+                                    <p>Loading transactions...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Account Cards -->
+                    <section class="card accounts-card">
+                        <header class="card-header">
+                            <h3 class="card-title">Your Accounts</h3>
+                            <a href="../accounts/accounts.html" class="view-all">Manage →</a>
+                        </header>
+                        <div class="card-body">
+                            <div class="accounts-list" id="accounts-list">
+                                <div class="loading-placeholder">
+                                    <div class="spinner"></div>
+                                    <p>Loading accounts...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>

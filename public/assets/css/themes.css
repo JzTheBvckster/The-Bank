@@ -1,0 +1,244 @@
+/**
+ * Theme Styles for SecureBank Application
+ * Light and Dark theme support with CSS custom properties
+ */
+
+/* ========== Light Theme (Default) ========== */
+.theme-light {
+    /* Primary Colors */
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+
+    /* Secondary Colors */
+    --secondary-color: #7c3aed;
+    --secondary-dark: #6d28d9;
+
+    /* Status Colors */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
+
+    /* Background Colors */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --section-bg: #f1f5f9;
+
+    /* Card & Container */
+    --card-bg: #ffffff;
+    --sidebar-bg: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --footer-bg: #f8fafc;
+    --modal-bg: #ffffff;
+
+    /* Input */
+    --input-bg: #ffffff;
+
+    /* Text Colors */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    /* Border */
+    --border-color: #e2e8f0;
+
+    /* Table */
+    --table-header-bg: #f8fafc;
+
+    /* Hover & Focus */
+    --hover-bg: #f1f5f9;
+    --focus-ring: rgba(37, 99, 235, 0.2);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Scrollbar */
+    --scrollbar-bg: #f1f5f9;
+    --scrollbar-thumb: #cbd5e1;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #2563eb, #7c3aed);
+    --gradient-success: linear-gradient(135deg, #10b981, #059669);
+    --gradient-card: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* ========== Dark Theme ========== */
+.theme-dark {
+    /* Primary Colors */
+    --primary-color: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+
+    /* Secondary Colors */
+    --secondary-color: #8b5cf6;
+    --secondary-dark: #7c3aed;
+
+    /* Status Colors */
+    --success-color: #34d399;
+    --warning-color: #fbbf24;
+    --danger-color: #f87171;
+    --info-color: #60a5fa;
+
+    /* Background Colors */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --section-bg: #1e293b;
+
+    /* Card & Container */
+    --card-bg: #1e293b;
+    --sidebar-bg: #1e293b;
+    --header-bg: rgba(15, 23, 42, 0.9);
+    --footer-bg: #1e293b;
+    --modal-bg: #1e293b;
+
+    /* Input */
+    --input-bg: #0f172a;
+
+    /* Text Colors */
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Border */
+    --border-color: #334155;
+
+    /* Table */
+    --table-header-bg: #1e293b;
+
+    /* Hover & Focus */
+    --hover-bg: #334155;
+    --focus-ring: rgba(59, 130, 246, 0.3);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+
+    /* Scrollbar */
+    --scrollbar-bg: #1e293b;
+    --scrollbar-thumb: #475569;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    --gradient-success: linear-gradient(135deg, #34d399, #10b981);
+    --gradient-card: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* ========== Scrollbar Styling ========== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ========== Selection ========== */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ========== Theme Transition ========== */
+body,
+.card,
+.app-sidebar,
+.app-topbar,
+.form-input,
+.form-select,
+.form-textarea {
+    transition: background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* ========== Accent Color Classes ========== */
+.accent-blue {
+    --accent-color: #3b82f6;
+}
+
+.accent-purple {
+    --accent-color: #8b5cf6;
+}
+
+.accent-green {
+    --accent-color: #10b981;
+}
+
+.accent-orange {
+    --accent-color: #f59e0b;
+}
+
+.accent-pink {
+    --accent-color: #ec4899;
+}
+
+/* ========== Balance Card Themes ========== */
+.balance-card {
+    background: var(--gradient-card);
+    color: white;
+}
+
+.balance-card.savings {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.balance-card.investment {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.balance-card.loan {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* ========== Chart Theme Colors ========== */
+.theme-light {
+    --chart-line-1: #2563eb;
+    --chart-line-2: #7c3aed;
+    --chart-line-3: #10b981;
+    --chart-bar-1: #3b82f6;
+    --chart-bar-2: #8b5cf6;
+    --chart-grid: #e2e8f0;
+}
+
+.theme-dark {
+    --chart-line-1: #60a5fa;
+    --chart-line-2: #a78bfa;
+    --chart-line-3: #34d399;
+    --chart-bar-1: #60a5fa;
+    --chart-bar-2: #a78bfa;
+    --chart-grid: #334155;
+}
+
+/* ========== Status Indicator Colors ========== */
+.status-active {
+    background: var(--success-color);
+}
+
+.status-pending {
+    background: var(--warning-color);
+}
+
+.status-inactive {
+    background: var(--danger-color);
+}
+
+.status-processing {
+    background: var(--info-color);
+}
