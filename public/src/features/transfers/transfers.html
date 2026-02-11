@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SecureBank - Money Transfers">
     <title>Transfers - SecureBank</title>
-    <link rel="stylesheet" href="../../../public/assets/css/global.css">
-    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/themes.css">
     <link rel="stylesheet" href="../dashboard/dashboard.css">
     <link rel="stylesheet" href="transfers.css">
 </head>
+
 <body class="theme-light">
     <div class="app-layout">
         <!-- Sidebar -->
         <aside class="app-sidebar" id="sidebar">
             <div class="sidebar-header">
-                <a href="../../../public/index.html" class="logo">
+                <a href="/index.html" class="logo">
                     <span class="logo-icon">🏦</span>
                     <span class="logo-text">SecureBank</span>
                 </a>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -55,7 +57,7 @@
                     </li>
                 </ul>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <button class="nav-link" data-action="logout">
                     <span class="nav-icon">🚪</span>
@@ -107,14 +109,8 @@
 
                                 <div class="form-group">
                                     <label for="toAccount" class="form-label">To Account</label>
-                                    <input 
-                                        type="text" 
-                                        id="toAccount" 
-                                        name="toAccount" 
-                                        class="form-input" 
-                                        placeholder="Enter account number or ID"
-                                        required
-                                    >
+                                    <input type="text" id="toAccount" name="toAccount" class="form-input"
+                                        placeholder="Enter account number or ID" required>
                                     <span class="form-hint">Enter the recipient's account number</span>
                                     <span class="form-error" id="toAccount-error"></span>
                                 </div>
@@ -123,30 +119,16 @@
                                     <label for="amount" class="form-label">Amount</label>
                                     <div class="amount-input-wrapper">
                                         <span class="currency-symbol">$</span>
-                                        <input 
-                                            type="number" 
-                                            id="amount" 
-                                            name="amount" 
-                                            class="form-input" 
-                                            placeholder="0.00"
-                                            min="0.01"
-                                            step="0.01"
-                                            required
-                                        >
+                                        <input type="number" id="amount" name="amount" class="form-input"
+                                            placeholder="0.00" min="0.01" step="0.01" required>
                                     </div>
                                     <span class="form-error" id="amount-error"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description" class="form-label">Description (Optional)</label>
-                                    <input 
-                                        type="text" 
-                                        id="description" 
-                                        name="description" 
-                                        class="form-input" 
-                                        placeholder="What's this for?"
-                                        maxlength="100"
-                                    >
+                                    <input type="text" id="description" name="description" class="form-input"
+                                        placeholder="What's this for?" maxlength="100">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-lg btn-block" id="transfer-btn">
@@ -198,4 +180,5 @@
 
     <script type="module" src="transfers.js"></script>
 </body>
+
 </html>

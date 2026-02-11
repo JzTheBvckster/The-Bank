@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - SecureBank</title>
-    <link rel="stylesheet" href="../../public/assets/css/global.css">
-    <link rel="stylesheet" href="../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/themes.css">
     <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <a href="../../public/index.html" class="logo">
+                <a href="/index.html" class="logo">
                     <span class="logo-icon">🏦</span>
                     <span class="logo-text">SecureBank</span>
                 </a>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <a href="../dashboard/dashboard.html" class="nav-item">
                     <span class="nav-icon">📊</span>
@@ -41,7 +43,7 @@
                     <span>Admin</span>
                 </a>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <button class="nav-item" id="logoutBtn">
                     <span class="nav-icon">🚪</span>
@@ -49,7 +51,7 @@
                 </button>
             </div>
         </aside>
-        
+
         <!-- Main Content -->
         <main class="main-content">
             <!-- Topbar -->
@@ -64,7 +66,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <!-- Page Content -->
             <div class="page-content">
                 <!-- Admin Stats -->
@@ -98,14 +100,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tabs -->
                 <div class="admin-tabs">
                     <button class="tab-btn active" data-tab="loans">Loan Approvals</button>
                     <button class="tab-btn" data-tab="users">User Management</button>
                     <button class="tab-btn" data-tab="roles">Role Management</button>
                 </div>
-                
+
                 <!-- Tab Content: Loan Approvals -->
                 <div class="tab-content active" id="loans-tab">
                     <div class="card">
@@ -132,7 +134,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tab Content: User Management -->
                 <div class="tab-content" id="users-tab">
                     <div class="card">
@@ -163,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tab Content: Role Management -->
                 <div class="tab-content" id="roles-tab">
                     <div class="roles-grid">
@@ -183,7 +185,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <div class="card role-card">
                             <div class="card-header">
                                 <h3>👔 Employee</h3>
@@ -200,7 +202,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <div class="card role-card">
                             <div class="card-header">
                                 <h3>🔐 Admin</h3>
@@ -222,7 +224,7 @@
             </div>
         </main>
     </div>
-    
+
     <!-- Loan Review Modal -->
     <div class="modal" id="loanReviewModal">
         <div class="modal-overlay"></div>
@@ -240,7 +242,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Edit User Modal -->
     <div class="modal" id="editUserModal">
         <div class="modal-overlay"></div>
@@ -283,7 +285,8 @@
             </div>
         </div>
     </div>
-    
+
     <script type="module" src="admin.js"></script>
 </body>
+
 </html>

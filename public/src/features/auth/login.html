@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Login to your SecureBank account">
     <title>Login - SecureBank</title>
-    <link rel="stylesheet" href="../../../public/assets/css/global.css">
-    <link rel="stylesheet" href="../../../public/assets/css/themes.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/themes.css">
     <link rel="stylesheet" href="auth.css">
 </head>
+
 <body class="theme-light">
     <div class="auth-page">
         <div class="auth-container">
             <div class="auth-card">
                 <header class="auth-header">
-                    <a href="../../../public/index.html" class="logo">
+                    <a href="/index.html" class="logo">
                         <span class="logo-icon">🏦</span>
                         <span class="logo-text">SecureBank</span>
                     </a>
@@ -25,31 +27,18 @@
                 <form id="login-form" class="auth-form" novalidate>
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-input" 
-                            placeholder="Enter your email"
-                            autocomplete="email"
-                            required
-                        >
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email"
+                            autocomplete="email" required>
                         <span class="form-error" id="email-error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="form-label">Password</label>
                         <div class="password-input-wrapper">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-input" 
-                                placeholder="Enter your password"
-                                autocomplete="current-password"
-                                required
-                            >
-                            <button type="button" class="password-toggle" data-action="toggle-password" aria-label="Toggle password visibility">
+                            <input type="password" id="password" name="password" class="form-input"
+                                placeholder="Enter your password" autocomplete="current-password" required>
+                            <button type="button" class="password-toggle" data-action="toggle-password"
+                                aria-label="Toggle password visibility">
                                 <span class="eye-icon">👁️</span>
                             </button>
                         </div>
@@ -119,14 +108,8 @@
                     <form id="forgot-form" novalidate>
                         <div class="form-group">
                             <label for="forgot-email" class="form-label">Email Address</label>
-                            <input 
-                                type="email" 
-                                id="forgot-email" 
-                                name="email" 
-                                class="form-input" 
-                                placeholder="Enter your email"
-                                required
-                            >
+                            <input type="email" id="forgot-email" name="email" class="form-input"
+                                placeholder="Enter your email" required>
                             <span class="form-error" id="forgot-email-error"></span>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
@@ -143,4 +126,5 @@
 
     <script type="module" src="auth.js"></script>
 </body>
+
 </html>
