@@ -98,46 +98,9 @@
                             <h3 class="card-title">Send Money</h3>
                         </header>
                         <div class="card-body">
-                            <form id="transfer-form" novalidate>
-                                <div class="form-group">
-                                    <label for="fromAccount" class="form-label">From Account</label>
-                                    <select id="fromAccount" name="fromAccount" class="form-select" required>
-                                        <option value="">Select source account</option>
-                                    </select>
-                                    <span class="form-error" id="fromAccount-error"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="toAccount" class="form-label">To Account</label>
-                                    <input type="text" id="toAccount" name="toAccount" class="form-input"
-                                        placeholder="Enter account number or ID" required>
-                                    <span class="form-hint">Enter the recipient's account number</span>
-                                    <span class="form-error" id="toAccount-error"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="amount" class="form-label">Amount</label>
-                                    <div class="amount-input-wrapper">
-                                        <span class="currency-symbol">$</span>
-                                        <input type="number" id="amount" name="amount" class="form-input"
-                                            placeholder="0.00" min="0.01" step="0.01" required>
-                                    </div>
-                                    <span class="form-error" id="amount-error"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="description" class="form-label">Description (Optional)</label>
-                                    <input type="text" id="description" name="description" class="form-input"
-                                        placeholder="What's this for?" maxlength="100">
-                                </div>
-
-                                <button type="submit" class="btn btn-primary btn-lg btn-block" id="transfer-btn">
-                                    <span class="btn-text">Send Money</span>
-                                    <span class="btn-loader hidden">
-                                        <span class="spinner-small"></span>
-                                    </span>
-                                </button>
-                            </form>
+                            <button class="btn btn-primary btn-block" data-action="open-transfer-modal">
+                                Start a Transfer
+                            </button>
                         </div>
                     </section>
 
@@ -175,6 +138,59 @@
             <h2>Transfer Successful!</h2>
             <p id="success-message">Your transfer has been completed.</p>
             <button class="btn btn-primary" data-action="close-modal">Done</button>
+        </div>
+    </div>
+
+    <!-- New Transfer Modal -->
+    <div class="modal" id="transfer-modal" role="dialog" aria-hidden="true">
+        <div class="modal-overlay" data-action="close-transfer-modal"></div>
+        <div class="modal-content modal-lg">
+            <header class="modal-header">
+                <h2>Send Money</h2>
+                <button class="modal-close" data-action="close-transfer-modal" aria-label="Close modal">&times;</button>
+            </header>
+            <div class="modal-body">
+                <form id="transfer-form" novalidate>
+                    <div class="form-group">
+                        <label for="fromAccount" class="form-label">From Account</label>
+                        <select id="fromAccount" name="fromAccount" class="form-select" required>
+                            <option value="">Select source account</option>
+                        </select>
+                        <span class="form-error" id="fromAccount-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toAccount" class="form-label">To Account</label>
+                        <input type="text" id="toAccount" name="toAccount" class="form-input"
+                            placeholder="Enter account number or ID" required>
+                        <span class="form-hint">Enter the recipient's account number</span>
+                        <span class="form-error" id="toAccount-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount" class="form-label">Amount</label>
+                        <div class="amount-input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="amount" name="amount" class="form-input" placeholder="0.00"
+                                min="0.01" step="0.01" required>
+                        </div>
+                        <span class="form-error" id="amount-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="form-label">Description (Optional)</label>
+                        <input type="text" id="description" name="description" class="form-input"
+                            placeholder="What's this for?" maxlength="100">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="transfer-btn">
+                        <span class="btn-text">Send Money</span>
+                        <span class="btn-loader hidden">
+                            <span class="spinner-small"></span>
+                        </span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 

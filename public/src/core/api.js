@@ -402,11 +402,48 @@ async function updateUserStatus(userId, status) {
 
 /**
  * Get dashboard statistics
- * @param {string} userId - User ID
+ * If `userId` is provided, returns stats scoped to that user.
+ * If `userId` is omitted, returns admin-level summary stats.
+ * @param {string} [userId] - User ID
  * @returns {Promise<Object>} Dashboard statistics
  */
 async function getDashboardStats(userId) {
     try {
+        // Admin summary stats (no userId)
+        if (!userId) {
+            const { collection, query, where, getDocs } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+            const db = getDbInstance();
+
+            const [usersSnap, pendingLoansSnap, approvedLoansSnap] = await Promise.all([
+                getDocs(collection(db, 'users')),
+                getDocs(query(collection(db, 'loans'), where('status', '==', 'pending'))),
+                getDocs(query(collection(db, 'loans'), where('status', '==', 'approved')))
+            ]);
+
+            const now = new Date();
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+            let approvedThisMonth = 0;
+            let totalLoanVolume = 0;
+
+            approvedLoansSnap.docs.forEach((loanDoc) => {
+                const data = loanDoc.data() || {};
+                totalLoanVolume += (data.amount || 0);
+
+                const updatedAt = data.updatedAt?.toDate ? data.updatedAt.toDate() : (data.updatedAt ? new Date(data.updatedAt) : null);
+                if (updatedAt && updatedAt >= startOfMonth) {
+                    approvedThisMonth += 1;
+                }
+            });
+
+            return {
+                totalUsers: usersSnap.size,
+                pendingLoans: pendingLoansSnap.size,
+                approvedThisMonth,
+                totalLoanVolume
+            };
+        }
+
         const accounts = await getUserAccounts(userId);
         const transactions = await getUserTransactions(userId, 30);
         const loans = await getUserLoans(userId);
@@ -445,6 +482,14 @@ async function getDashboardStats(userId) {
         };
     } catch (error) {
         handleError(error, 'getDashboardStats');
+        if (!userId) {
+            return {
+                totalUsers: 0,
+                pendingLoans: 0,
+                approvedThisMonth: 0,
+                totalLoanVolume: 0
+            };
+        }
         return {
             totalBalance: 0,
             totalDebt: 0,

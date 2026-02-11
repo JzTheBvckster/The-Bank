@@ -63,6 +63,22 @@ function handleAuthStateChange(user) {
  * Setup event listeners
  */
 function setupEventListeners() {
+    // Open transfer modal
+    document.querySelectorAll('[data-action="open-transfer-modal"]').forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+            openModal('transfer-modal');
+        });
+    });
+
+    // Close transfer modal
+    document.querySelectorAll('[data-action="close-transfer-modal"]').forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+            closeModal('transfer-modal');
+        });
+    });
+
     // Transfer form
     const transferForm = document.getElementById('transfer-form');
     if (transferForm) {
@@ -215,6 +231,8 @@ async function handleTransfer(event) {
             ...transferData,
             userId: user.uid
         });
+
+        closeModal('transfer-modal');
 
         // Show success modal
         document.getElementById('success-message').textContent =

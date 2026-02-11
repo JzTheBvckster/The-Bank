@@ -6,7 +6,7 @@
  * @module main
  */
 
-import { initTheme, toggleTheme } from '../../src/core/utils.js';
+import { initTheme, toggleTheme } from '/src/core/utils.js';
 
 /**
  * Initialize the landing page
@@ -14,10 +14,10 @@ import { initTheme, toggleTheme } from '../../src/core/utils.js';
 function initLandingPage() {
     // Initialize theme from localStorage or system preference
     initTheme();
-    
+
     // Setup event listeners
     setupEventListeners();
-    
+
     // Initialize smooth scroll
     initSmoothScroll();
 }
@@ -31,7 +31,7 @@ function setupEventListeners() {
     if (themeToggle) {
         themeToggle.addEventListener('click', handleThemeToggle);
     }
-    
+
     // Mobile menu toggle (if exists)
     const menuToggle = document.querySelector('[data-action="toggle-menu"]');
     if (menuToggle) {
@@ -77,13 +77,13 @@ function handleMenuToggle(event) {
  */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(event) {
+        anchor.addEventListener('click', function (event) {
             const href = this.getAttribute('href');
             if (href === '#') return;
-            
+
             event.preventDefault();
             const target = document.querySelector(href);
-            
+
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',

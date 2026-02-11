@@ -360,3 +360,48 @@ export {
     onAuthStateChange,
     removeAuthStateListener
 };
+
+// --- Compatibility exports (used by some feature modules) ---
+
+/**
+ * Alias for onAuthStateChange that also ensures initAuth has run.
+ * @param {Function} listener
+ */
+function onAuthChange(listener) {
+    onAuthStateChange(listener);
+    // Fire and establish observer
+    initAuth().catch(() => {
+        // initAuth already reports via handleError
+    });
+}
+
+/**
+ * Alias for signOut
+ * @returns {Promise<void>}
+ */
+async function signOutUser() {
+    return signOut();
+}
+
+/**
+ * Require that the current user has one of the allowed roles.
+ * @param {Array<string>} allowedRoles
+ * @returns {Promise<boolean>}
+ */
+async function requireRole(allowedRoles) {
+    await initAuth();
+    const user = getCurrentUser();
+    if (!user || !user.uid) return false;
+
+    // If role is missing in-memory, attempt to fetch it.
+    if (!user.role) {
+        const userData = await getUserData(user.uid);
+        if (userData && userData.role) {
+            user.role = userData.role;
+        }
+    }
+
+    return Boolean(user.role && allowedRoles.includes(user.role));
+}
+
+export { onAuthChange, signOutUser, requireRole };
