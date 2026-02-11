@@ -397,11 +397,23 @@ function openModal(modalId) {
             modalReturnFocus.set(modalId, active);
         }
 
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (!modal.dataset.dialogInit) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal(modalId);
+            });
+            modal.addEventListener('cancel', (e) => {
+                e.preventDefault();
+                closeModal(modalId);
+            });
+            modal.dataset.dialogInit = '1';
+        }
 
-        modal.inert = false;
-        modal.removeAttribute('inert');
+        if (typeof modal.showModal === 'function') {
+            if (!modal.open) modal.showModal();
+        } else {
+            modal.setAttribute('open', '');
+        }
+        document.body.style.overflow = 'hidden';
 
         // Focus first input
         const firstInput = modal.querySelector('input');
@@ -428,11 +440,12 @@ function closeModal(modalId) {
             }
         }
 
-        modal.classList.remove('active');
+        if (typeof modal.close === 'function') {
+            if (modal.open) modal.close();
+        } else {
+            modal.removeAttribute('open');
+        }
         document.body.style.overflow = '';
-
-        modal.inert = true;
-        modal.setAttribute('inert', '');
     }
 }
 

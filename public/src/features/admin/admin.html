@@ -225,13 +225,12 @@
         </main>
     </div>
 
-    <!-- Loan Review Modal -->
-    <div class="modal" id="loanReviewModal">
-        <div class="modal-overlay"></div>
+    <!-- Loan Review Dialog -->
+    <dialog class="dialog" id="loanReviewModal">
         <div class="modal-content modal-lg">
             <div class="modal-header">
                 <h2>Review Loan Application</h2>
-                <button class="modal-close" aria-label="Close modal">&times;</button>
+                <button class="modal-close" aria-label="Close dialog">&times;</button>
             </div>
             <div class="modal-body" id="loanReviewContent">
                 <!-- Loan details will be loaded here -->
@@ -241,15 +240,14 @@
                 <button class="btn btn-primary" id="approveLoanBtn">Approve</button>
             </div>
         </div>
-    </div>
+    </dialog>
 
-    <!-- Edit User Modal -->
-    <div class="modal" id="editUserModal">
-        <div class="modal-overlay"></div>
+    <!-- Edit User Dialog -->
+    <dialog class="dialog" id="editUserModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Edit User</h2>
-                <button class="modal-close" aria-label="Close modal">&times;</button>
+                <button class="modal-close" aria-label="Close dialog">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="editUserForm">
@@ -284,7 +282,7 @@
                 <button class="btn btn-primary" type="submit" form="editUserForm">Save Changes</button>
             </div>
         </div>
-    </div>
+    </dialog>
 
     <script type="module" src="admin.js"></script>
 </body>

@@ -96,8 +96,7 @@
         </div>
 
         <!-- Forgot Password Modal -->
-        <div class="modal" id="forgot-modal" role="dialog" aria-labelledby="forgot-modal-title" inert>
-            <div class="modal-overlay" data-action="close-modal"></div>
+        <dialog class="dialog" id="forgot-modal" aria-labelledby="forgot-modal-title">
             <div class="modal-content">
                 <header class="modal-header">
                     <h2 id="forgot-modal-title">Reset Password</h2>
@@ -116,7 +115,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </dialog>
 
         <!-- Theme Toggle -->
         <button class="theme-toggle floating" data-action="toggle-theme" aria-label="Toggle theme">

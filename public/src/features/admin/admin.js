@@ -13,6 +13,61 @@ let pendingLoans = [];
 let allUsers = [];
 let selectedLoan = null;
 
+// Track focus so we can restore it when closing dialogs
+const dialogReturnFocus = new Map();
+
+function openDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) return;
+
+    const active = document.activeElement;
+    if (active && active instanceof HTMLElement) {
+        dialogReturnFocus.set(dialogId, active);
+    }
+
+    if (!dialog.dataset.dialogInit) {
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) closeDialog(dialogId);
+        });
+        dialog.addEventListener('cancel', (e) => {
+            e.preventDefault();
+            closeDialog(dialogId);
+        });
+        dialog.dataset.dialogInit = '1';
+    }
+
+    if (typeof dialog.showModal === 'function') {
+        if (!dialog.open) dialog.showModal();
+    } else {
+        dialog.setAttribute('open', '');
+    }
+
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) return;
+
+    const active = document.activeElement;
+    if (active && active instanceof HTMLElement && dialog.contains(active)) {
+        active.blur();
+    }
+
+    if (typeof dialog.close === 'function') {
+        if (dialog.open) dialog.close();
+    } else {
+        dialog.removeAttribute('open');
+    }
+
+    document.body.style.overflow = '';
+
+    const returnEl = dialogReturnFocus.get(dialogId);
+    if (returnEl && returnEl.isConnected && typeof returnEl.focus === 'function') {
+        returnEl.focus();
+    }
+}
+
 /**
  * Initialize Admin Panel
  */
@@ -350,7 +405,7 @@ function openLoanReview(loan) {
     notesSection.appendChild(notesTextarea);
     content.appendChild(notesSection);
 
-    modal.classList.add('active');
+    openDialog('loanReviewModal');
 }
 
 /**
@@ -363,7 +418,7 @@ function openEditUser(user) {
     document.getElementById('editUserRole').value = user.role || 'customer';
     document.getElementById('editUserStatus').value = user.status || 'active';
 
-    document.getElementById('editUserModal').classList.add('active');
+    openDialog('editUserModal');
 }
 
 /**
@@ -410,9 +465,8 @@ async function rejectLoan(loanId) {
  * Close all modals
  */
 function closeModals() {
-    document.querySelectorAll('.modal.active').forEach(modal => {
-        modal.classList.remove('active');
-    });
+    closeDialog('loanReviewModal');
+    closeDialog('editUserModal');
     selectedLoan = null;
 }
 
@@ -455,10 +509,6 @@ function setupEventListeners() {
     // Modal close buttons
     document.querySelectorAll('.modal-close, [data-dismiss="modal"]').forEach(btn => {
         btn.addEventListener('click', closeModals);
-    });
-
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', closeModals);
     });
 
     // Loan review modal actions

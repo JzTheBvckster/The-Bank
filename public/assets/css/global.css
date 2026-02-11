@@ -219,6 +219,58 @@ img {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+/* ========== Dialog (Native <dialog>) ========== */
+dialog.dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 90vw;
+}
+
+dialog.dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+dialog.dialog .modal-content {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    width: min(90vw, 520px);
+}
+
+dialog.dialog .modal-content.modal-lg {
+    width: min(90vw, 720px);
+}
+
+dialog.dialog .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+dialog.dialog .modal-header h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+    color: var(--text-primary);
+}
+
+dialog.dialog .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+dialog.dialog .modal-close:hover {
+    color: var(--text-primary);
+}
+
 .form-input::placeholder {
     color: var(--text-muted);
 }

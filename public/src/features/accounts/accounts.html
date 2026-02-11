@@ -110,9 +110,8 @@
         </main>
     </div>
 
-    <!-- New Account Modal -->
-    <div class="modal" id="new-account-modal" role="dialog" inert>
-        <div class="modal-overlay" data-action="close-modal"></div>
+    <!-- New Account Dialog -->
+    <dialog class="dialog" id="new-account-modal">
         <div class="modal-content">
             <header class="modal-header">
                 <h2>Open New Account</h2>
@@ -148,11 +147,10 @@
                 </form>
             </div>
         </div>
-    </div>
+    </dialog>
 
-    <!-- Account Details Modal -->
-    <div class="modal" id="account-details-modal" role="dialog" inert>
-        <div class="modal-overlay" data-action="close-details-modal"></div>
+    <!-- Account Details Dialog -->
+    <dialog class="dialog" id="account-details-modal">
         <div class="modal-content modal-lg">
             <header class="modal-header">
                 <h2>Account Details</h2>
@@ -162,7 +160,7 @@
                 <!-- Filled dynamically -->
             </div>
         </div>
-    </div>
+    </dialog>
 
     <script type="module" src="accounts.js"></script>
 </body>

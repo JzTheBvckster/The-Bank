@@ -130,20 +130,18 @@
         </main>
     </div>
 
-    <!-- Transfer Success Modal -->
-    <div class="modal" id="success-modal" role="dialog" inert>
-        <div class="modal-overlay" data-action="close-modal"></div>
+    <!-- Transfer Success Dialog -->
+    <dialog class="dialog" id="success-modal">
         <div class="modal-content success-modal-content">
             <div class="success-icon">✓</div>
             <h2>Transfer Successful!</h2>
             <p id="success-message">Your transfer has been completed.</p>
             <button class="btn btn-primary" data-action="close-modal">Done</button>
         </div>
-    </div>
+    </dialog>
 
-    <!-- New Transfer Modal -->
-    <div class="modal" id="transfer-modal" role="dialog" inert>
-        <div class="modal-overlay" data-action="close-transfer-modal"></div>
+    <!-- New Transfer Dialog -->
+    <dialog class="dialog" id="transfer-modal">
         <div class="modal-content modal-lg">
             <header class="modal-header">
                 <h2>Send Money</h2>
@@ -192,7 +190,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </dialog>
 
     <script type="module" src="transfers.js"></script>
 </body>

@@ -376,10 +376,29 @@ function openModal(modalId) {
             modalReturnFocus.set(modalId, active);
         }
 
-        modal.classList.add('active');
-        modal.inert = false;
-        modal.removeAttribute('inert');
+        if (!modal.dataset.dialogInit) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal(modalId);
+            });
+            modal.addEventListener('cancel', (e) => {
+                e.preventDefault();
+                closeModal(modalId);
+            });
+            modal.dataset.dialogInit = '1';
+        }
+
+        if (typeof modal.showModal === 'function') {
+            if (!modal.open) modal.showModal();
+        } else {
+            modal.setAttribute('open', '');
+        }
+        document.body.style.overflow = 'hidden';
         calculateLoan();
+
+        const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable && typeof focusable.focus === 'function') {
+            setTimeout(() => focusable.focus(), 0);
+        }
     }
 }
 
@@ -396,9 +415,12 @@ function closeModal(modalId) {
             }
         }
 
-        modal.classList.remove('active');
-        modal.inert = true;
-        modal.setAttribute('inert', '');
+        if (typeof modal.close === 'function') {
+            if (modal.open) modal.close();
+        } else {
+            modal.removeAttribute('open');
+        }
+        document.body.style.overflow = '';
     }
 }
 
