@@ -17,7 +17,7 @@ serviceAccount*.json
 # Firebase CLI local state
 .firebase/
 firebase-debug.log
-firebase
+firebase.js
 
 
 # Node dependencies generated locally
