@@ -246,31 +246,40 @@ function showSuccessMessage(message) {
 function validateForm(fields, rules) {
     const errors = {};
 
+    const isEmptyValue = (value) => {
+        if (value === null || value === undefined) return true;
+        if (typeof value === 'string') return value.trim() === '';
+        if (typeof value === 'number') return Number.isNaN(value);
+        if (typeof value === 'boolean') return value === false;
+        if (Array.isArray(value)) return value.length === 0;
+        return false;
+    };
+
     Object.entries(rules).forEach(([fieldName, fieldRules]) => {
         const value = fields[fieldName];
 
         fieldRules.forEach(rule => {
             // Required check
-            if (rule.required && (!value || value.trim() === '')) {
+            if (rule.required && isEmptyValue(value)) {
                 errors[fieldName] = rule.message || `${fieldName} is required`;
                 return;
             }
 
             // Skip other validations if field is empty and not required
-            if (!value) return;
+            if (isEmptyValue(value)) return;
 
             // Min length
-            if (rule.minLength && value.length < rule.minLength) {
+            if (rule.minLength && typeof value === 'string' && value.length < rule.minLength) {
                 errors[fieldName] = rule.message || `${fieldName} must be at least ${rule.minLength} characters`;
             }
 
             // Max length
-            if (rule.maxLength && value.length > rule.maxLength) {
+            if (rule.maxLength && typeof value === 'string' && value.length > rule.maxLength) {
                 errors[fieldName] = rule.message || `${fieldName} must be less than ${rule.maxLength} characters`;
             }
 
             // Pattern
-            if (rule.pattern && !rule.pattern.test(value)) {
+            if (rule.pattern && typeof value === 'string' && !rule.pattern.test(value)) {
                 errors[fieldName] = rule.message || `${fieldName} is invalid`;
             }
 
