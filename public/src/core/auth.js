@@ -27,7 +27,8 @@ async function initAuth() {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 // Get user data from Firestore
-                currentUser = await getUserData(user.uid);
+                const userData = await getUserData(user.uid);
+                currentUser = userData || {};
                 currentUser.uid = user.uid;
                 currentUser.email = user.email;
             } else {
@@ -51,6 +52,7 @@ async function initAuth() {
  */
 async function registerUser(email, password, userData) {
     try {
+        await initializeFirebase();
         const { createUserWithEmailAndPassword, updateProfile } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
         const { doc, setDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
 
@@ -108,6 +110,7 @@ async function registerUser(email, password, userData) {
  */
 async function signIn(email, password) {
     try {
+        await initializeFirebase();
         const { signInWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
         const auth = getAuthInstance();
 
@@ -126,6 +129,7 @@ async function signIn(email, password) {
  */
 async function signOut() {
     try {
+        await initializeFirebase();
         const { signOut: firebaseSignOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
         const auth = getAuthInstance();
 
@@ -143,6 +147,7 @@ async function signOut() {
  */
 async function resetPassword(email) {
     try {
+        await initializeFirebase();
         const { sendPasswordResetEmail } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
         const auth = getAuthInstance();
 
@@ -159,6 +164,7 @@ async function resetPassword(email) {
  */
 async function getUserData(uid) {
     try {
+        await initializeFirebase();
         const { doc, getDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
         const db = getDbInstance();
 
@@ -183,6 +189,7 @@ async function getUserData(uid) {
  */
 async function updateUserProfile(uid, data) {
     try {
+        await initializeFirebase();
         const { doc, updateDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
         const db = getDbInstance();
 

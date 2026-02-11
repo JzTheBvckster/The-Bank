@@ -31,12 +31,16 @@ let storage = null;
  */
 async function initializeFirebase() {
     try {
-        // Dynamic import of Firebase modules (v12.9.0)
-        const { initializeApp } = await import('https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js');
-        const { getAuth } = await import('https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js');
-        const { getFirestore } = await import('https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js');
-        const { getStorage } = await import('https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js');
-        const { getAnalytics } = await import('https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js');
+        if (app && auth && db && storage) {
+            return { app, auth, db, storage };
+        }
+
+        // Dynamic import of Firebase modules (v10.7.1)
+        const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+        const { getAuth } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+        const { getFirestore } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+        const { getStorage } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js');
+        const { getAnalytics } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js');
 
         // Initialize Firebase
         app = initializeApp(firebaseConfig);
@@ -44,11 +48,13 @@ async function initializeFirebase() {
         db = getFirestore(app);
         storage = getStorage(app);
 
-        // Initialize Analytics
-        const analytics = getAnalytics(app);
-
         console.log('Firebase initialized successfully');
-        return { app, auth, db, storage, analytics };
+        try {
+            const analytics = getAnalytics(app);
+            return { app, auth, db, storage, analytics };
+        } catch {
+            return { app, auth, db, storage };
+        }
     } catch (error) {
         console.error('Firebase initialization error:', error);
         throw error;
