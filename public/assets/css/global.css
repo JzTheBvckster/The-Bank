@@ -221,10 +221,19 @@ img {
 
 /* ========== Dialog (Native <dialog>) ========== */
 dialog.dialog {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     padding: 0;
     background: transparent;
-    max-width: 90vw;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    overflow: auto;
+    padding: 1.5rem;
 }
 
 dialog.dialog::backdrop {
