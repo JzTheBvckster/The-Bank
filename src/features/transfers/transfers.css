@@ -1,0 +1,132 @@
+/**
+ * Transfers Feature Styles
+ */
+
+/* ========== Transfers Layout ========== */
+.transfers-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1.5rem;
+}
+
+/* ========== Transfer Form Card ========== */
+.transfer-form-card {
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+
+.amount-input-wrapper {
+    position: relative;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.amount-input-wrapper .form-input {
+    padding-left: 2rem;
+}
+
+/* ========== Transactions History ========== */
+.transactions-history-card .card-header {
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-select {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-width: 120px;
+}
+
+.transaction-meta {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.transaction-category {
+    background: var(--hover-bg);
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* ========== Success Modal ========== */
+.success-modal-content {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: var(--success-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.success-modal-content h2 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.success-modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* ========== Empty State ========== */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+    .transfers-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .transfer-form-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .transactions-history-card .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-controls {
+        width: 100%;
+    }
+
+    .filter-select {
+        flex: 1;
+    }
+}
