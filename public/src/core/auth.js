@@ -12,35 +12,65 @@ import { handleError, AuthError } from './errorHandler.js';
 // Auth state
 let currentUser = null;
 let authStateListeners = [];
+let authInitPromise = null;
+let authStateKnown = false;
 
 /**
  * Initialize authentication and set up auth state observer
  * @returns {Promise<void>}
  */
 async function initAuth() {
-    try {
+    if (authInitPromise) {
+        return authInitPromise;
+    }
+
+    authInitPromise = (async () => {
         await initializeFirebase();
 
-        const { onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+        const { onAuthStateChanged, setPersistence, browserLocalPersistence, browserSessionPersistence } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
         const auth = getAuthInstance();
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // Get user data from Firestore
-                const userData = await getUserData(user.uid);
-                currentUser = userData || {};
-                currentUser.uid = user.uid;
-                currentUser.email = user.email;
-            } else {
-                currentUser = null;
+        // Ensure auth persists across page navigations.
+        try {
+            await setPersistence(auth, browserLocalPersistence);
+        } catch {
+            try {
+                await setPersistence(auth, browserSessionPersistence);
+            } catch {
+                // Some environments (private mode/extensions) may block persistence entirely.
             }
+        }
 
-            // Notify all listeners
-            notifyAuthStateListeners(currentUser);
+        return await new Promise((resolve) => {
+            let resolved = false;
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userData = await getUserData(user.uid);
+                    currentUser = userData || {};
+                    currentUser.uid = user.uid;
+                    currentUser.email = user.email;
+                } else {
+                    currentUser = null;
+                }
+
+                authStateKnown = true;
+                notifyAuthStateListeners(currentUser);
+
+                if (!resolved) {
+                    resolved = true;
+                    resolve(currentUser);
+                }
+            });
         });
-    } catch (error) {
+    })().catch((error) => {
+        authInitPromise = null;
+        authStateKnown = false;
         handleError(error, 'initAuth');
-    }
+        throw error;
+    });
+
+    return authInitPromise;
 }
 
 /**
@@ -249,6 +279,15 @@ function isEmployee() {
  */
 function onAuthStateChange(listener) {
     authStateListeners.push(listener);
+
+    // If auth state is already known, call immediately so pages don't race.
+    if (authStateKnown) {
+        try {
+            listener(currentUser);
+        } catch (error) {
+            console.error('Auth state listener error:', error);
+        }
+    }
 }
 
 /**
