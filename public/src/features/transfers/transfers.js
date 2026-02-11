@@ -16,6 +16,9 @@ import { initTheme, toggleTheme, formatCurrency, formatDateTime, maskAccountNumb
 let userAccounts = [];
 let allTransactions = [];
 
+// Track focus so we can restore it when closing modals
+const modalReturnFocus = new Map();
+
 /**
  * Initialize transfers page
  */
@@ -363,16 +366,38 @@ function setButtonLoading(buttonId, isLoading) {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement) {
+            modalReturnFocus.set(modalId, active);
+        }
+
         modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
+
+        // Enable interaction/focus when open
+        modal.inert = false;
+        modal.removeAttribute('inert');
     }
 }
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        // Move focus out of the modal before disabling it
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement && modal.contains(active)) {
+            active.blur();
+
+            const returnEl = modalReturnFocus.get(modalId);
+            if (returnEl && returnEl.isConnected && typeof returnEl.focus === 'function') {
+                returnEl.focus();
+            }
+        }
+
         modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
+
+        // Disable interaction/focus when closed
+        modal.inert = true;
+        modal.setAttribute('inert', '');
     }
 }
 

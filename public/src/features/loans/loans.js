@@ -24,6 +24,9 @@ const INTEREST_RATES = {
 // State
 let userLoans = [];
 
+// Track focus so we can restore it when closing modals
+const modalReturnFocus = new Map();
+
 /**
  * Initialize loans page
  */
@@ -368,8 +371,14 @@ async function handleLogout(event) {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement) {
+            modalReturnFocus.set(modalId, active);
+        }
+
         modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
+        modal.inert = false;
+        modal.removeAttribute('inert');
         calculateLoan();
     }
 }
@@ -377,8 +386,19 @@ function openModal(modalId) {
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement && modal.contains(active)) {
+            active.blur();
+
+            const returnEl = modalReturnFocus.get(modalId);
+            if (returnEl && returnEl.isConnected && typeof returnEl.focus === 'function') {
+                returnEl.focus();
+            }
+        }
+
         modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
+        modal.inert = true;
+        modal.setAttribute('inert', '');
     }
 }
 

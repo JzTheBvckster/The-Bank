@@ -11,6 +11,9 @@ import { initializeFirebase } from '../../core/firebase.js';
 import { handleError, validateForm, displayFormErrors, clearFormErrors, showSuccessMessage } from '../../core/errorHandler.js';
 import { initTheme, toggleTheme, isValidEmail, validatePassword, debounce } from '../../core/utils.js';
 
+// Track focus so we can restore it when closing modals
+const modalReturnFocus = new Map();
+
 /**
  * Initialize authentication page
  */
@@ -389,9 +392,16 @@ function setButtonLoading(buttonId, isLoading) {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement) {
+            modalReturnFocus.set(modalId, active);
+        }
+
         modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        modal.inert = false;
+        modal.removeAttribute('inert');
 
         // Focus first input
         const firstInput = modal.querySelector('input');
@@ -408,9 +418,21 @@ function openModal(modalId) {
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
+        const active = document.activeElement;
+        if (active && active instanceof HTMLElement && modal.contains(active)) {
+            active.blur();
+
+            const returnEl = modalReturnFocus.get(modalId);
+            if (returnEl && returnEl.isConnected && typeof returnEl.focus === 'function') {
+                returnEl.focus();
+            }
+        }
+
         modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+
+        modal.inert = true;
+        modal.setAttribute('inert', '');
     }
 }
 
