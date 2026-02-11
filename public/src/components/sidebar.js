@@ -4,37 +4,37 @@
  */
 
 import { signOutUser } from '../core/auth.js';
-import { showToast } from '../core/utils.js';
+import { showToast, createIcon } from '../core/utils.js';
 
 /**
  * Sidebar configuration
  */
 const SIDEBAR_CONFIG = {
     logo: {
-        icon: '🏦',
+        iconId: 'bank',
         text: 'SecureBank',
-        href: '/public/index.html'
+        href: '/index.html'
     },
     navItems: {
         customer: [
-            { icon: '📊', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
-            { icon: '💳', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
-            { icon: '💸', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
-            { icon: '📋', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' }
+            { iconId: 'dashboard', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
+            { iconId: 'card', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
+            { iconId: 'transfer', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
+            { iconId: 'document', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' }
         ],
         employee: [
-            { icon: '📊', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
-            { icon: '💳', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
-            { icon: '💸', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
-            { icon: '📋', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' },
-            { icon: '⚙️', text: 'Admin', href: '/src/features/admin/admin.html', id: 'admin' }
+            { iconId: 'dashboard', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
+            { iconId: 'card', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
+            { iconId: 'transfer', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
+            { iconId: 'document', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' },
+            { iconId: 'settings', text: 'Admin', href: '/src/features/admin/admin.html', id: 'admin' }
         ],
         admin: [
-            { icon: '📊', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
-            { icon: '💳', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
-            { icon: '💸', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
-            { icon: '📋', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' },
-            { icon: '⚙️', text: 'Admin', href: '/src/features/admin/admin.html', id: 'admin' }
+            { iconId: 'dashboard', text: 'Dashboard', href: '/src/features/dashboard/dashboard.html', id: 'dashboard' },
+            { iconId: 'card', text: 'Accounts', href: '/src/features/accounts/accounts.html', id: 'accounts' },
+            { iconId: 'transfer', text: 'Transfers', href: '/src/features/transfers/transfers.html', id: 'transfers' },
+            { iconId: 'document', text: 'Loans', href: '/src/features/loans/loans.html', id: 'loans' },
+            { iconId: 'settings', text: 'Admin', href: '/src/features/admin/admin.html', id: 'admin' }
         ]
     }
 };
@@ -57,10 +57,14 @@ export function createSidebar(activePage = '', userRole = 'customer') {
     const logo = document.createElement('a');
     logo.href = SIDEBAR_CONFIG.logo.href;
     logo.className = 'logo';
-    logo.innerHTML = `
-        <span class="logo-icon">${SIDEBAR_CONFIG.logo.icon}</span>
-        <span class="logo-text">${SIDEBAR_CONFIG.logo.text}</span>
-    `;
+    const logoIcon = document.createElement('span');
+    logoIcon.className = 'logo-icon';
+    logoIcon.appendChild(createIcon(SIDEBAR_CONFIG.logo.iconId));
+    const logoText = document.createElement('span');
+    logoText.className = 'logo-text';
+    logoText.textContent = SIDEBAR_CONFIG.logo.text;
+    logo.appendChild(logoIcon);
+    logo.appendChild(logoText);
     header.appendChild(logo);
 
     // Navigation
@@ -73,10 +77,15 @@ export function createSidebar(activePage = '', userRole = 'customer') {
         const link = document.createElement('a');
         link.href = item.href;
         link.className = `nav-item${item.id === activePage ? ' active' : ''}`;
-        link.innerHTML = `
-            <span class="nav-icon">${item.icon}</span>
-            <span>${item.text}</span>
-        `;
+        const icon = document.createElement('span');
+        icon.className = 'nav-icon';
+        icon.appendChild(createIcon(item.iconId));
+
+        const text = document.createElement('span');
+        text.textContent = item.text;
+
+        link.appendChild(icon);
+        link.appendChild(text);
         nav.appendChild(link);
     });
 
@@ -87,10 +96,13 @@ export function createSidebar(activePage = '', userRole = 'customer') {
     const logoutBtn = document.createElement('button');
     logoutBtn.className = 'nav-item';
     logoutBtn.id = 'logoutBtn';
-    logoutBtn.innerHTML = `
-        <span class="nav-icon">🚪</span>
-        <span>Logout</span>
-    `;
+    const logoutIcon = document.createElement('span');
+    logoutIcon.className = 'nav-icon';
+    logoutIcon.appendChild(createIcon('logout'));
+    const logoutText = document.createElement('span');
+    logoutText.textContent = 'Logout';
+    logoutBtn.appendChild(logoutIcon);
+    logoutBtn.appendChild(logoutText);
     logoutBtn.addEventListener('click', handleLogout);
     footer.appendChild(logoutBtn);
 

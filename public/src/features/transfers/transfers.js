@@ -10,7 +10,7 @@ import { initAuth, signOut, getCurrentUser, isAuthenticated, isAdmin, onAuthStat
 import { initializeFirebase } from '../../core/firebase.js';
 import { getUserAccounts, getUserTransactions, createTransfer } from '../../core/api.js';
 import { handleError, validateForm, displayFormErrors, clearFormErrors, showSuccessMessage } from '../../core/errorHandler.js';
-import { initTheme, toggleTheme, formatCurrency, formatDateTime, maskAccountNumber, createElement, debounce } from '../../core/utils.js';
+import { initTheme, toggleTheme, formatCurrency, formatDateTime, maskAccountNumber, createElement, createIcon, debounce } from '../../core/utils.js';
 
 // State
 let userAccounts = [];
@@ -279,7 +279,7 @@ function renderTransactions(transactions) {
     if (!transactions || transactions.length === 0) {
         container.appendChild(
             createElement('div', { className: 'empty-state' }, [
-                createElement('span', { className: 'empty-icon' }, '💸'),
+                createElement('span', { className: 'empty-icon' }, createIcon('transfer')),
                 createElement('p', {}, 'No transactions found')
             ])
         );
@@ -288,7 +288,7 @@ function renderTransactions(transactions) {
 
     transactions.forEach(transaction => {
         const isCredit = transaction.type === 'credit';
-        const icon = isCredit ? '↓' : '↑';
+        const icon = isCredit ? createIcon('arrow-down') : createIcon('arrow-up');
         const amountClass = isCredit ? 'credit' : 'debit';
 
         const transactionItem = createElement('div', { className: 'transaction-item' }, [
@@ -331,7 +331,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon() {
     const isDark = document.body.classList.contains('theme-dark');
     document.querySelectorAll('.theme-icon').forEach(icon => {
-        icon.textContent = isDark ? '☀️' : '🌙';
+        icon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     });
 }
 

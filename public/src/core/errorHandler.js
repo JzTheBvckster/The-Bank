@@ -1,5 +1,7 @@
 "use strict";
 
+import { createIcon } from './utils.js';
+
 /**
  * Error Handler Module for SecureBank Application
  * Centralized error handling and logging
@@ -186,7 +188,16 @@ function showErrorMessage(message) {
             document.head.appendChild(styles);
         }
 
-        toast.textContent = `⚠ ${message}`;
+        const iconWrap = document.createElement('span');
+        iconWrap.className = 'toast-icon';
+        iconWrap.appendChild(createIcon('warning'));
+
+        const msg = document.createElement('span');
+        msg.className = 'toast-message';
+        msg.textContent = message;
+
+        toast.appendChild(iconWrap);
+        toast.appendChild(msg);
         document.body.appendChild(toast);
 
         // Remove after 5 seconds
@@ -227,7 +238,16 @@ function showSuccessMessage(message) {
             animation: slideInError 0.3s ease;
         `;
 
-        toast.textContent = `✓ ${message}`;
+        const iconWrap = document.createElement('span');
+        iconWrap.className = 'toast-icon';
+        iconWrap.appendChild(createIcon('check'));
+
+        const msg = document.createElement('span');
+        msg.className = 'toast-message';
+        msg.textContent = message;
+
+        toast.appendChild(iconWrap);
+        toast.appendChild(msg);
         document.body.appendChild(toast);
 
         setTimeout(() => {

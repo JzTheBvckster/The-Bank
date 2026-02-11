@@ -17,7 +17,11 @@
         <aside class="app-sidebar" id="sidebar">
             <div class="sidebar-header">
                 <a href="/index.html" class="logo">
-                    <span class="logo-icon">🏦</span>
+                    <span class="logo-icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use href="/assets/icons/sprite.svg#bank"></use>
+                        </svg>
+                    </span>
                     <span class="logo-text">SecureBank</span>
                 </a>
             </div>
@@ -26,31 +30,41 @@
                 <ul class="nav-list">
                     <li class="nav-item active">
                         <a href="dashboard.html" class="nav-link">
-                            <span class="nav-icon">📊</span>
+                            <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#dashboard"></use>
+                                </svg></span>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="../accounts/accounts.html" class="nav-link">
-                            <span class="nav-icon">💳</span>
+                            <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#card"></use>
+                                </svg></span>
                             <span class="nav-text">Accounts</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="../transfers/transfers.html" class="nav-link">
-                            <span class="nav-icon">💸</span>
+                            <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#transfer"></use>
+                                </svg></span>
                             <span class="nav-text">Transfers</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="../loans/loans.html" class="nav-link">
-                            <span class="nav-icon">📋</span>
+                            <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#document"></use>
+                                </svg></span>
                             <span class="nav-text">Loans</span>
                         </a>
                     </li>
                     <li class="nav-item admin-only hidden">
                         <a href="../admin/admin.html" class="nav-link">
-                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#settings"></use>
+                                </svg></span>
                             <span class="nav-text">Admin Panel</span>
                         </a>
                     </li>
@@ -59,7 +73,9 @@
 
             <div class="sidebar-footer">
                 <button class="nav-link" data-action="logout">
-                    <span class="nav-icon">🚪</span>
+                    <span class="nav-icon"><svg class="icon" aria-hidden="true">
+                            <use href="/assets/icons/sprite.svg#logout"></use>
+                        </svg></span>
                     <span class="nav-text">Logout</span>
                 </button>
             </div>
@@ -71,29 +87,43 @@
             <header class="app-topbar">
                 <div class="topbar-content">
                     <button class="menu-toggle" data-action="toggle-menu" aria-label="Toggle menu">
-                        <span>☰</span>
+                        <svg class="icon" aria-hidden="true">
+                            <use href="/assets/icons/sprite.svg#menu"></use>
+                        </svg>
                     </button>
                     <h1 class="page-title">Dashboard</h1>
                     <div class="topbar-actions">
                         <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle theme">
-                            <span class="theme-icon">🌙</span>
+                            <span class="theme-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#moon"></use>
+                                </svg></span>
                         </button>
                         <div class="user-menu">
                             <button class="user-btn" data-action="toggle-user-menu">
-                                <span class="user-avatar">👤</span>
+                                <span class="user-avatar"><svg class="icon" aria-hidden="true">
+                                        <use href="/assets/icons/sprite.svg#user"></use>
+                                    </svg></span>
                                 <span class="user-name" id="user-name">Loading...</span>
-                                <span class="dropdown-icon">▼</span>
+                                <span class="dropdown-icon"><svg class="icon" aria-hidden="true">
+                                        <use href="/assets/icons/sprite.svg#arrow-down"></use>
+                                    </svg></span>
                             </button>
                             <div class="user-dropdown" id="user-dropdown">
                                 <a href="#" class="dropdown-item">
-                                    <span>👤</span> Profile
+                                    <span aria-hidden="true"><svg class="icon">
+                                            <use href="/assets/icons/sprite.svg#user"></use>
+                                        </svg></span> Profile
                                 </a>
                                 <a href="#" class="dropdown-item">
-                                    <span>⚙️</span> Settings
+                                    <span aria-hidden="true"><svg class="icon">
+                                            <use href="/assets/icons/sprite.svg#settings"></use>
+                                        </svg></span> Settings
                                 </a>
                                 <hr class="dropdown-divider">
                                 <button class="dropdown-item" data-action="logout">
-                                    <span>🚪</span> Logout
+                                    <span aria-hidden="true"><svg class="icon">
+                                            <use href="/assets/icons/sprite.svg#logout"></use>
+                                        </svg></span> Logout
                                 </button>
                             </div>
                         </div>
@@ -116,43 +146,57 @@
                 <section class="stats-grid">
                     <article class="stat-card balance-card">
                         <div class="stat-header">
-                            <span class="stat-icon">💰</span>
+                            <span class="stat-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#money"></use>
+                                </svg></span>
                             <span class="stat-label">Total Balance</span>
                         </div>
                         <div class="stat-value" id="total-balance">$0.00</div>
                         <div class="stat-change positive">
-                            <span>↑ 12.5%</span>
+                            <span><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-up"></use>
+                                </svg> 12.5%</span>
                             <span class="change-period">vs last month</span>
                         </div>
                     </article>
 
                     <article class="stat-card">
                         <div class="stat-header">
-                            <span class="stat-icon">📈</span>
+                            <span class="stat-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-up"></use>
+                                </svg></span>
                             <span class="stat-label">Monthly Income</span>
                         </div>
                         <div class="stat-value" id="monthly-income">$0.00</div>
                         <div class="stat-change positive">
-                            <span>↑ 8.2%</span>
+                            <span><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-up"></use>
+                                </svg> 8.2%</span>
                             <span class="change-period">vs last month</span>
                         </div>
                     </article>
 
                     <article class="stat-card">
                         <div class="stat-header">
-                            <span class="stat-icon">📉</span>
+                            <span class="stat-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-down"></use>
+                                </svg></span>
                             <span class="stat-label">Monthly Expenses</span>
                         </div>
                         <div class="stat-value" id="monthly-expenses">$0.00</div>
                         <div class="stat-change negative">
-                            <span>↓ 3.1%</span>
+                            <span><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-down"></use>
+                                </svg> 3.1%</span>
                             <span class="change-period">vs last month</span>
                         </div>
                     </article>
 
                     <article class="stat-card">
                         <div class="stat-header">
-                            <span class="stat-icon">🏦</span>
+                            <span class="stat-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#document"></use>
+                                </svg></span>
                             <span class="stat-label">Active Loans</span>
                         </div>
                         <div class="stat-value" id="active-loans">0</div>
@@ -167,19 +211,27 @@
                     <h3>Quick Actions</h3>
                     <div class="actions-grid">
                         <a href="../transfers/transfers.html" class="action-card">
-                            <span class="action-icon">💸</span>
+                            <span class="action-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#transfer"></use>
+                                </svg></span>
                             <span class="action-text">Send Money</span>
                         </a>
                         <a href="../accounts/accounts.html" class="action-card">
-                            <span class="action-icon">➕</span>
+                            <span class="action-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#plus"></use>
+                                </svg></span>
                             <span class="action-text">New Account</span>
                         </a>
                         <a href="../loans/loans.html" class="action-card">
-                            <span class="action-icon">📋</span>
+                            <span class="action-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#document"></use>
+                                </svg></span>
                             <span class="action-text">Apply for Loan</span>
                         </a>
                         <a href="#" class="action-card" data-action="download-statement">
-                            <span class="action-icon">📄</span>
+                            <span class="action-icon"><svg class="icon" aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#clipboard"></use>
+                                </svg></span>
                             <span class="action-text">Statements</span>
                         </a>
                     </div>
@@ -191,7 +243,10 @@
                     <section class="card transactions-card">
                         <header class="card-header">
                             <h3 class="card-title">Recent Transactions</h3>
-                            <a href="../transfers/transfers.html" class="view-all">View All →</a>
+                            <a href="../transfers/transfers.html" class="view-all">View All <svg class="icon"
+                                    aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-right"></use>
+                                </svg></a>
                         </header>
                         <div class="card-body">
                             <div class="transactions-list" id="transactions-list">
@@ -207,7 +262,10 @@
                     <section class="card accounts-card">
                         <header class="card-header">
                             <h3 class="card-title">Your Accounts</h3>
-                            <a href="../accounts/accounts.html" class="view-all">Manage →</a>
+                            <a href="../accounts/accounts.html" class="view-all">Manage <svg class="icon"
+                                    aria-hidden="true">
+                                    <use href="/assets/icons/sprite.svg#arrow-right"></use>
+                                </svg></a>
                         </header>
                         <div class="card-body">
                             <div class="accounts-list" id="accounts-list">

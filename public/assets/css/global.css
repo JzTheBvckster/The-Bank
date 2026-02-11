@@ -81,6 +81,15 @@ img {
     display: block;
 }
 
+/* ========== Icons ========== */
+.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+
 /* ========== Container ========== */
 .container {
     width: 100%;

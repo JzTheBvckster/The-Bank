@@ -181,6 +181,27 @@ function createElement(tag, attributes = {}, children = null) {
 }
 
 /**
+ * Create an SVG icon element using the shared sprite
+ * @param {string} id - Symbol id in /assets/icons/sprite.svg
+ * @param {Object} options
+ * @param {string} options.className - CSS class to apply
+ * @returns {SVGSVGElement}
+ */
+function createIcon(id, { className = 'icon' } = {}) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', className);
+    svg.setAttribute('focusable', 'false');
+
+    const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const href = `/assets/icons/sprite.svg#${id}`;
+    use.setAttribute('href', href);
+    use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', href);
+    svg.appendChild(use);
+
+    return svg;
+}
+
+/**
  * Debounce function to limit rate of function calls
  * @param {Function} func - Function to debounce
  * @param {number} wait - Wait time in milliseconds
@@ -303,10 +324,10 @@ function showToast(message, type = 'info', duration = 3000) {
     }
 
     const icons = {
-        success: '✓',
-        error: '✕',
-        warning: '⚠',
-        info: 'ℹ'
+        success: createIcon('check'),
+        error: createIcon('error'),
+        warning: createIcon('warning'),
+        info: createIcon('info')
     };
 
     const toast = createElement('div', {
@@ -418,6 +439,7 @@ export {
     formatRelativeTime,
     sanitizeInput,
     createElement,
+    createIcon,
     debounce,
     throttle,
     isValidEmail,

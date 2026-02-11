@@ -6,7 +6,7 @@
  * @module main
  */
 
-import { initTheme, toggleTheme } from '/src/core/utils.js';
+import { initTheme, toggleTheme, createIcon } from '/src/core/utils.js';
 
 /**
  * Initialize the landing page
@@ -56,7 +56,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon(isDark) {
     const themeIcon = document.querySelector('.theme-icon');
     if (themeIcon) {
-        themeIcon.textContent = isDark ? '☀️' : '🌙';
+        themeIcon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     }
 }
 

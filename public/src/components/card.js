@@ -3,7 +3,7 @@
  * Reusable card components for displaying content
  */
 
-import { createElement } from '../core/utils.js';
+import { createElement, createIcon } from '../core/utils.js';
 
 /**
  * Create a basic card element
@@ -76,7 +76,7 @@ export function createCard(options = {}) {
  */
 export function createStatCard(options = {}) {
     const {
-        icon = '📊',
+        icon = null,
         label = 'Stat',
         value = '0',
         trend = 'neutral',
@@ -88,7 +88,16 @@ export function createStatCard(options = {}) {
 
     // Icon
     const iconElement = createElement('div', { className: 'stat-card-icon' });
-    iconElement.innerHTML = icon;
+
+    if (icon instanceof HTMLElement) {
+        iconElement.appendChild(icon);
+    } else if (typeof icon === 'string' && icon.trim().startsWith('<')) {
+        iconElement.innerHTML = icon;
+    } else if (typeof icon === 'string' && icon.trim()) {
+        iconElement.appendChild(createIcon(icon.trim()));
+    } else {
+        iconElement.appendChild(createIcon('dashboard'));
+    }
 
     // Content
     const content = createElement('div', { className: 'stat-card-content' });
@@ -98,8 +107,9 @@ export function createStatCard(options = {}) {
     // Trend (if provided)
     if (trendValue) {
         const trendElement = createElement('div', { className: `stat-card-trend trend-${trend}` });
-        const trendIcon = trend === 'up' ? '↑' : trend === 'down' ? '↓' : '→';
-        trendElement.textContent = `${trendIcon} ${trendValue}`;
+        const trendIconId = trend === 'up' ? 'arrow-up' : trend === 'down' ? 'arrow-down' : 'arrow-right';
+        trendElement.appendChild(createIcon(trendIconId));
+        trendElement.appendChild(document.createTextNode(` ${trendValue}`));
         content.appendChild(trendElement);
     }
 
@@ -122,11 +132,11 @@ export function createStatCard(options = {}) {
 export function createAccountCard(account, onClick = null) {
     const { type, accountNumber, balance, currency = 'USD' } = account;
 
-    const typeIcons = {
-        checking: '💳',
-        savings: '🏦',
-        business: '💼',
-        investment: '📈'
+    const typeIconIds = {
+        checking: 'card',
+        savings: 'bank',
+        business: 'briefcase',
+        investment: 'chart'
     };
 
     const card = createElement('div', { className: 'account-card' });
@@ -137,7 +147,11 @@ export function createAccountCard(account, onClick = null) {
 
     // Header
     const header = createElement('div', { className: 'account-card-header' });
-    header.appendChild(createElement('span', { className: 'account-icon', textContent: typeIcons[type] || '💳' }));
+
+    const accountIcon = createElement('span', { className: 'account-icon' });
+    accountIcon.appendChild(createIcon(typeIconIds[type] || 'card'));
+    header.appendChild(accountIcon);
+
     header.appendChild(createElement('span', { className: 'account-type', textContent: type.charAt(0).toUpperCase() + type.slice(1) }));
 
     // Body
@@ -174,7 +188,7 @@ export function createTransactionCard(transaction) {
 
     // Icon
     const icon = createElement('div', { className: `transaction-icon ${type}` });
-    icon.textContent = type === 'credit' ? '↓' : '↑';
+    icon.appendChild(createIcon(type === 'credit' ? 'arrow-down' : 'arrow-up'));
 
     // Details
     const details = createElement('div', { className: 'transaction-details' });
@@ -219,7 +233,7 @@ export function createTransactionCard(transaction) {
  */
 export function createEmptyState(options = {}) {
     const {
-        icon = '📭',
+        icon = null,
         title = 'No data',
         message = 'There is nothing to display.',
         action = null
@@ -227,7 +241,16 @@ export function createEmptyState(options = {}) {
 
     const container = createElement('div', { className: 'empty-state' });
 
-    container.appendChild(createElement('span', { className: 'empty-icon', textContent: icon }));
+    const emptyIcon = createElement('span', { className: 'empty-icon' });
+    if (icon instanceof HTMLElement) {
+        emptyIcon.appendChild(icon);
+    } else if (typeof icon === 'string' && icon.trim()) {
+        emptyIcon.appendChild(createIcon(icon.trim()));
+    } else {
+        emptyIcon.appendChild(createIcon('info'));
+    }
+
+    container.appendChild(emptyIcon);
     container.appendChild(createElement('h3', { textContent: title }));
     container.appendChild(createElement('p', { textContent: message }));
 

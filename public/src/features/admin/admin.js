@@ -5,7 +5,7 @@
 
 import { onAuthChange, signOutUser, requireRole } from '../../core/auth.js';
 import { getPendingLoans, updateLoanStatus, getAllUsers, getDashboardStats } from '../../core/api.js';
-import { formatCurrency, formatDate, showToast, showLoading, hideLoading, createElement } from '../../core/utils.js';
+import { formatCurrency, formatDate, showToast, showLoading, hideLoading, createElement, createIcon } from '../../core/utils.js';
 
 // State
 let currentUser = null;
@@ -180,11 +180,11 @@ function renderLoanApplications(filterType = '') {
 
     noLoansMessage.style.display = 'none';
 
-    const loanTypeIcons = {
-        personal: '👤',
-        mortgage: '🏠',
-        auto: '🚗',
-        business: '💼'
+    const loanTypeIconIds = {
+        personal: 'money',
+        mortgage: 'home',
+        auto: 'car',
+        business: 'briefcase'
     };
 
     filteredLoans.forEach(loan => {
@@ -193,7 +193,10 @@ function renderLoanApplications(filterType = '') {
         const loanHeader = createElement('div', { className: 'loan-app-header' });
 
         const loanInfo = createElement('div', { className: 'loan-app-info' });
-        loanInfo.appendChild(createElement('span', { className: 'loan-app-icon', textContent: loanTypeIcons[loan.loanType] || '📋' }));
+
+        const iconWrapper = createElement('span', { className: 'loan-app-icon' });
+        iconWrapper.appendChild(createIcon(loanTypeIconIds[loan.loanType] || 'document'));
+        loanInfo.appendChild(iconWrapper);
 
         const loanDetails = createElement('div', { className: 'loan-app-details' });
         loanDetails.appendChild(createElement('h4', { textContent: `${loan.loanType.charAt(0).toUpperCase() + loan.loanType.slice(1)} Loan` }));
@@ -284,7 +287,9 @@ function renderUsersTable(searchTerm = '') {
         // User column
         const userCell = createElement('td');
         const userInfo = createElement('div', { className: 'user-info' });
-        userInfo.appendChild(createElement('span', { className: 'user-avatar-sm', textContent: '👤' }));
+        const userAvatar = createElement('span', { className: 'user-avatar-sm' });
+        userAvatar.appendChild(createIcon('user'));
+        userInfo.appendChild(userAvatar);
         userInfo.appendChild(createElement('span', { textContent: user.name || 'Unknown' }));
         userCell.appendChild(userInfo);
 
@@ -318,8 +323,10 @@ function renderUsersTable(searchTerm = '') {
 
         const editBtn = createElement('button', {
             className: 'btn btn-outline btn-sm',
-            textContent: '✏️'
+            type: 'button'
         });
+        editBtn.setAttribute('aria-label', 'Edit user');
+        editBtn.appendChild(createIcon('edit'));
         editBtn.onclick = () => openEditUser(user);
 
         actionsDiv.appendChild(editBtn);
@@ -344,11 +351,11 @@ function openLoanReview(loan) {
     const modal = document.getElementById('loanReviewModal');
     const content = document.getElementById('loanReviewContent');
 
-    const loanTypeIcons = {
-        personal: '👤',
-        mortgage: '🏠',
-        auto: '🚗',
-        business: '💼'
+    const loanTypeIconIds = {
+        personal: 'money',
+        mortgage: 'home',
+        auto: 'car',
+        business: 'briefcase'
     };
 
     content.innerHTML = '';
@@ -368,7 +375,14 @@ function openLoanReview(loan) {
         return item;
     };
 
-    loanInfoGrid.appendChild(addInfoItem('Loan Type', `${loanTypeIcons[loan.loanType] || '📋'} ${loan.loanType.charAt(0).toUpperCase() + loan.loanType.slice(1)}`));
+    const loanTypeValue = createElement('span', { className: 'info-value' });
+    loanTypeValue.appendChild(createIcon(loanTypeIconIds[loan.loanType] || 'document'));
+    loanTypeValue.appendChild(document.createTextNode(` ${loan.loanType.charAt(0).toUpperCase() + loan.loanType.slice(1)}`));
+
+    const loanTypeItem = createElement('div', { className: 'info-item' });
+    loanTypeItem.appendChild(createElement('span', { className: 'info-label', textContent: 'Loan Type' }));
+    loanTypeItem.appendChild(loanTypeValue);
+    loanInfoGrid.appendChild(loanTypeItem);
     loanInfoGrid.appendChild(addInfoItem('Amount', formatCurrency(loan.amount)));
     loanInfoGrid.appendChild(addInfoItem('Term', `${loan.termMonths} months`));
     loanInfoGrid.appendChild(addInfoItem('Interest Rate', `${loan.interestRate}%`));
@@ -547,7 +561,7 @@ function setupTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
 
     document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    themeToggle?.replaceChildren(createIcon(savedTheme === 'dark' ? 'sun' : 'moon'));
 
     themeToggle?.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -555,7 +569,7 @@ function setupTheme() {
 
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        themeToggle?.replaceChildren(createIcon(newTheme === 'dark' ? 'sun' : 'moon'));
     });
 }
 

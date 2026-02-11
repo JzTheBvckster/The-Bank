@@ -9,7 +9,7 @@
 import { initAuth, registerUser, signIn, resetPassword, isAuthenticated, getCurrentUser } from '../../core/auth.js';
 import { initializeFirebase } from '../../core/firebase.js';
 import { handleError, validateForm, displayFormErrors, clearFormErrors, showSuccessMessage } from '../../core/errorHandler.js';
-import { initTheme, toggleTheme, isValidEmail, validatePassword, debounce } from '../../core/utils.js';
+import { initTheme, toggleTheme, isValidEmail, validatePassword, createIcon, debounce } from '../../core/utils.js';
 
 // Track focus so we can restore it when closing modals
 const modalReturnFocus = new Map();
@@ -296,7 +296,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon() {
     const isDark = document.body.classList.contains('theme-dark');
     document.querySelectorAll('.theme-icon').forEach(icon => {
-        icon.textContent = isDark ? '☀️' : '🌙';
+        icon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     });
 }
 
@@ -312,10 +312,10 @@ function handlePasswordToggle(event) {
 
     if (input.type === 'password') {
         input.type = 'text';
-        icon.textContent = '🙈';
+        icon.replaceChildren(createIcon('eye-off'));
     } else {
         input.type = 'password';
-        icon.textContent = '👁️';
+        icon.replaceChildren(createIcon('eye'));
     }
 }
 

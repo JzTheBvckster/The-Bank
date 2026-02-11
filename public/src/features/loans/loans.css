@@ -34,8 +34,16 @@
 }
 
 .product-icon {
-    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.product-icon .icon {
+    width: 3rem;
+    height: 3rem;
 }
 
 .product-card h3 {
@@ -73,6 +81,9 @@
 }
 
 .product-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
     padding: 0.5rem 0;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
@@ -82,9 +93,10 @@
     border-bottom: none;
 }
 
-.product-features li::before {
-    content: '✓ ';
+.product-features li .icon {
     color: var(--success-color);
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
 }
 
 /* ========== My Loans ========== */
@@ -122,7 +134,15 @@
 }
 
 .loan-icon {
-    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+}
+
+.loan-icon .icon {
+    width: 2rem;
+    height: 2rem;
 }
 
 .loan-type-info h4 {

@@ -3,6 +3,13 @@
  * Reusable top navigation bar component
  */
 
+import { createIcon } from '../core/utils.js';
+
+function setThemeToggleIcon(buttonEl, theme) {
+    if (!buttonEl) return;
+    buttonEl.replaceChildren(createIcon(theme === 'dark' ? 'sun' : 'moon'));
+}
+
 /**
  * Create topbar element
  * @param {Object} options - Topbar options
@@ -25,7 +32,8 @@ export function createTopbar(options = {}) {
     const menuToggle = document.createElement('button');
     menuToggle.className = 'menu-toggle';
     menuToggle.id = 'menuToggle';
-    menuToggle.textContent = '☰';
+    menuToggle.setAttribute('aria-label', 'Toggle menu');
+    menuToggle.appendChild(createIcon('menu'));
     menuToggle.addEventListener('click', () => {
         if (onMenuToggle) {
             onMenuToggle();
@@ -50,7 +58,7 @@ export function createTopbar(options = {}) {
     themeToggle.setAttribute('aria-label', 'Toggle theme');
 
     const savedTheme = localStorage.getItem('theme') || 'light';
-    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    setThemeToggleIcon(themeToggle, savedTheme);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -58,7 +66,7 @@ export function createTopbar(options = {}) {
 
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        setThemeToggleIcon(themeToggle, newTheme);
     });
 
     // User menu
@@ -72,7 +80,7 @@ export function createTopbar(options = {}) {
 
     const userAvatar = document.createElement('span');
     userAvatar.className = 'user-avatar';
-    userAvatar.textContent = '👤';
+    userAvatar.appendChild(createIcon('user'));
 
     userMenu.appendChild(userNameSpan);
     userMenu.appendChild(userAvatar);
@@ -119,7 +127,7 @@ export function initTheme() {
 
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
-        themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        setThemeToggleIcon(themeToggle, savedTheme);
     }
 }
 

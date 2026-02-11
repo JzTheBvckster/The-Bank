@@ -229,6 +229,9 @@
 }
 
 .permissions-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-secondary);
@@ -238,9 +241,10 @@
     border-bottom: none;
 }
 
-.permissions-list li::before {
-    content: '✓ ';
+.permissions-list li .icon {
     color: var(--success-color);
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
 }
 
 /* ========== Loan Review Modal ========== */

@@ -10,7 +10,7 @@ import { initAuth, signOut, getCurrentUser, isAuthenticated, isAdmin, onAuthStat
 import { initializeFirebase } from '../../core/firebase.js';
 import { getDashboardStats, getUserAccounts, getUserTransactions } from '../../core/api.js';
 import { handleError, showSuccessMessage } from '../../core/errorHandler.js';
-import { initTheme, toggleTheme, formatCurrency, formatRelativeTime, maskAccountNumber, createElement } from '../../core/utils.js';
+import { initTheme, toggleTheme, formatCurrency, formatRelativeTime, maskAccountNumber, createElement, createIcon } from '../../core/utils.js';
 
 /**
  * Initialize dashboard page
@@ -243,11 +243,10 @@ function renderTransactions(transactions) {
 
     transactions.forEach(transaction => {
         const isCredit = transaction.type === 'credit';
-        const icon = isCredit ? '↓' : '↑';
         const amountClass = isCredit ? 'credit' : 'debit';
 
         const transactionItem = createElement('div', { className: 'transaction-item' }, [
-            createElement('div', { className: `transaction-icon ${amountClass}` }, icon),
+            createElement('div', { className: `transaction-icon ${amountClass}` }, createIcon(isCredit ? 'arrow-down' : 'arrow-up')),
             createElement('div', { className: 'transaction-details' }, [
                 createElement('span', { className: 'transaction-title' }, transaction.description || 'Transaction'),
                 createElement('span', { className: 'transaction-date' }, formatRelativeTime(transaction.createdAt))
@@ -293,7 +292,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon() {
     const isDark = document.body.classList.contains('theme-dark');
     document.querySelectorAll('.theme-icon').forEach(icon => {
-        icon.textContent = isDark ? '☀️' : '🌙';
+        icon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     });
 }
 

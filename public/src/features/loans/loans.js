@@ -10,7 +10,7 @@ import { initAuth, signOut, getCurrentUser, isAuthenticated, isAdmin, onAuthStat
 import { initializeFirebase } from '../../core/firebase.js';
 import { getUserLoans, applyForLoan } from '../../core/api.js';
 import { handleError, validateForm, displayFormErrors, showSuccessMessage } from '../../core/errorHandler.js';
-import { initTheme, toggleTheme, formatCurrency, formatDate, createElement, debounce } from '../../core/utils.js';
+import { initTheme, toggleTheme, formatCurrency, formatDate, createElement, createIcon, debounce } from '../../core/utils.js';
 
 // Interest rates
 const INTEREST_RATES = {
@@ -157,7 +157,7 @@ function renderLoans() {
     if (!userLoans || userLoans.length === 0) {
         container.appendChild(
             createElement('div', { className: 'empty-state' }, [
-                createElement('span', { className: 'empty-icon' }, '📋'),
+                createElement('span', { className: 'empty-icon' }, createIcon('document')),
                 createElement('p', {}, 'No loan applications yet'),
                 createElement('p', { className: 'text-muted' }, 'Apply for a loan to get started')
             ])
@@ -183,11 +183,11 @@ function createLoanCard(loan) {
     };
 
     const loanIcons = {
-        'personal': '💰',
-        'home': '🏠',
-        'auto': '🚗',
-        'education': '🎓',
-        'business': '💼'
+        personal: () => createIcon('money'),
+        home: () => createIcon('home'),
+        auto: () => createIcon('car'),
+        education: () => createIcon('graduation'),
+        business: () => createIcon('briefcase')
     };
 
     const monthlyPayment = calculateMonthlyPayment(loan.amount, loan.interestRate, loan.term);
@@ -195,7 +195,7 @@ function createLoanCard(loan) {
     const card = createElement('article', { className: 'loan-card' }, [
         createElement('div', { className: 'loan-card-header' }, [
             createElement('div', { className: 'loan-type-info' }, [
-                createElement('span', { className: 'loan-icon' }, loanIcons[loan.loanType] || '📋'),
+                createElement('span', { className: 'loan-icon' }, (loanIcons[loan.loanType] ? loanIcons[loan.loanType]() : createIcon('document'))),
                 createElement('div', {}, [
                     createElement('h4', {}, capitalizeFirst(loan.loanType) + ' Loan'),
                     createElement('span', { className: 'loan-date' }, `Applied: ${formatDate(loan.createdAt)}`)
@@ -349,7 +349,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon() {
     const isDark = document.body.classList.contains('theme-dark');
     document.querySelectorAll('.theme-icon').forEach(icon => {
-        icon.textContent = isDark ? '☀️' : '🌙';
+        icon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     });
 }
 

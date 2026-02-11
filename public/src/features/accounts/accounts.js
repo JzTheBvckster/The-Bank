@@ -10,7 +10,7 @@ import { initAuth, signOut, getCurrentUser, isAuthenticated, isAdmin, onAuthStat
 import { initializeFirebase } from '../../core/firebase.js';
 import { getUserAccounts, createAccount, getAccountTransactions } from '../../core/api.js';
 import { handleError, validateForm, displayFormErrors, showSuccessMessage } from '../../core/errorHandler.js';
-import { initTheme, toggleTheme, formatCurrency, formatDate, maskAccountNumber, createElement, copyToClipboard, showToast } from '../../core/utils.js';
+import { initTheme, toggleTheme, formatCurrency, formatDate, maskAccountNumber, createElement, createIcon, copyToClipboard, showToast } from '../../core/utils.js';
 
 // State
 let userAccounts = [];
@@ -141,7 +141,7 @@ function renderAccounts() {
     if (!userAccounts || userAccounts.length === 0) {
         container.appendChild(
             createElement('div', { className: 'empty-state-large' }, [
-                createElement('span', { className: 'empty-icon' }, '💳'),
+                createElement('span', { className: 'empty-icon' }, createIcon('card')),
                 createElement('h3', {}, 'No Accounts Yet'),
                 createElement('p', {}, 'Open your first account to start managing your finances'),
                 createElement('button', {
@@ -180,7 +180,7 @@ function createAccountCard(account) {
                     e.stopPropagation();
                     handleCopyAccountNumber(account.accountNumber);
                 }
-            }, '📋')
+            }, createIcon('clipboard'))
         ]),
         createElement('div', { className: 'account-card-balance' }, [
             createElement('span', { className: 'balance-label' }, 'Available Balance'),
@@ -206,11 +206,11 @@ function createAccountCard(account) {
  */
 function getAccountIcon(type) {
     const icons = {
-        'checking': '💳',
-        'savings': '🏦',
-        'investment': '📈'
+        checking: () => createIcon('card'),
+        savings: () => createIcon('bank'),
+        investment: () => createIcon('chart')
     };
-    return icons[type] || '💰';
+    return (icons[type] ? icons[type]() : createIcon('money'));
 }
 
 /**
@@ -299,7 +299,7 @@ function updateAccountTypeInfo() {
         const list = createElement('ul', { className: 'account-features' });
         info.features.forEach(feature => {
             list.appendChild(createElement('li', {}, [
-                createElement('span', { className: 'feature-check' }, '✓'),
+                createElement('span', { className: 'feature-check' }, createIcon('check')),
                 feature
             ]));
         });
@@ -410,7 +410,7 @@ function handleThemeToggle(event) {
 function updateThemeIcon() {
     const isDark = document.body.classList.contains('theme-dark');
     document.querySelectorAll('.theme-icon').forEach(icon => {
-        icon.textContent = isDark ? '☀️' : '🌙';
+        icon.replaceChildren(createIcon(isDark ? 'sun' : 'moon'));
     });
 }
 
